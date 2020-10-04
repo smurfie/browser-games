@@ -1,0 +1,18 @@
+<svg width="535" height="531" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <title>nxt_checkbox_unchecked</title>
+ <defs>
+  <linearGradient id="linearGradient3996">
+   <stop stop-color="#b8b8b8" id="stop3998" offset="0"/>
+   <stop stop-color="#b8b8b8" stop-opacity="0" id="stop4000" offset="1"/>
+  </linearGradient>
+  <linearGradient y2="1498.8496" x2="-727.92688" y1="1498.8496" x1="-481.63879" gradientTransform="matrix(0.97994177,0,0,1.5038759,-12.092225,-449.52009)" gradientUnits="userSpaceOnUse" id="linearGradient4027" xlink:href="#linearGradient3996"/>
+  <linearGradient y2="1498.8496" x2="-727.92688" y1="1498.8496" x1="-481.63879" gradientTransform="matrix(1.1726642,0,0,1.2567202,-14.470369,-375.64336)" gradientUnits="userSpaceOnUse" id="linearGradient4057" xlink:href="#linearGradient3996"/>
+ </defs>
+ <metadata id="metadata7">image/svg+xml</metadata>
+ <g>
+  <title>Layer 1</title>
+  <g id="layer2">
+   <path fill="none" stroke="#404040" stroke-width="55" stroke-linejoin="round" stroke-miterlimit="4" d="m122.705269,64.025703l208.905083,0c50.562408,0 91.267944,37.07103 91.267944,83.118965l0,225.202957c0,46.047882 -40.705536,83.118927 -91.267944,83.118927l-208.905083,0c-50.562416,0 -91.267929,-37.071045 -91.267929,-83.118927l0,-225.202957c0,-46.047935 40.705513,-83.118965 91.267929,-83.118965z" id="rect2816"/>
+  </g>
+ </g>
+</svg>

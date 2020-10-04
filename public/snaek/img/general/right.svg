@@ -1,0 +1,20 @@
+<svg width="2500" height="2500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+ <metadata id="metadata287">image/svg+xml</metadata>
+ <defs>
+  <linearGradient id="linearGradient4880">
+   <stop stop-color="#00ae00" id="stop4882" offset="0"/>
+   <stop stop-color="#00ae00" offset="0.405741" id="stop4890"/>
+   <stop stop-color="#3be93b" id="stop4884" offset="1"/>
+  </linearGradient>
+  <defs>
+   <clipPath id="clip1">
+    <path id="path25" d="m704,0l0,1204l-704,0l1250,1297l1251,-1297l-705,0l0,-1204l-1092,0z"/>
+   </clipPath>
+  </defs>
+  <linearGradient y2="1" x2="0.4998" y1="0" x1="0.4998" id="linearGradient4886" xlink:href="#linearGradient4880"/>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <path transform="rotate(-90 1250 1250)" fill="#ff0000" id="path275" d="m703.718506,0l0,1203.518555l-703.718506,0l1249.500244,1296.481445l1250.499756,-1296.481445l-704.71814,0l0,-1203.518555l-1091.563354,0"/>
+ </g>
+</svg>

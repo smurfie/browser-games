@@ -1,0 +1,16 @@
+http://dabuttonfactory.com
+
+Font: Calibri
+Size: 24
+Text Shadow: true
+Bold: true
+Distance: 1
+Color: #222222
+Output: Image
+Format: png
+Style: Rounded Box
+Corner radius: 3
+Background: gradient
+Top color: #bbbbbb
+Bottom color: #222222
+Size: fixed 200 x 50

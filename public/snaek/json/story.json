@@ -1,0 +1,2023 @@
+[
+    {
+        "name":"The Legend",
+        "source":"/snaek/img/story/stages/snaek.png",
+        "w":4,
+        "h":3,
+        "characters":{
+            "egg": {"source": "/snaek/img/story/characters/egg.png"},
+            "egghatched1": {"source": "/snaek/img/story/characters/egghatched1.png"},
+            "egghatched2": {"source": "/snaek/img/story/characters/egghatched2.png"},
+            "egghatched3": {"source": "/snaek/img/story/characters/egghatched3.png"},
+            "eviltree": {"source": "/snaek/img/story/characters/eviltree.svg"},
+            "mummy": {"source": "/snaek/img/story/characters/mummy.svg"},
+            "owl": {"source": "/snaek/img/story/characters/owl.png"},
+            "scorpion": {"source": "/snaek/img/story/characters/scorpion.svg"},
+            "snaek": {"source": "/snaek/img/story/characters/snaek.png"},
+            "spider": {"source": "/snaek/img/story/characters/spider.png"}
+        },
+        "backgrounds":{
+            "bigtree": {"source": "/snaek/img/story/stages/bigtree.png"},
+            "desert": {"source": "/snaek/img/story/stages/desert.jpg"},
+            "forest": {"source": "/snaek/img/story/stages/forest.jpg"},
+            "jungle": {"source": "/snaek/img/story/stages/jungle.jpg"}
+        },
+        "stages":[
+            {
+                "name":"The Unfriendly Forest",
+                "background":"forest",
+                "levels":[
+                    {
+                        "x":1,
+                        "y":8,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"egg",
+                                "sentence":"Why is so dark here? I will try to move a little... CRAAACK... Ouch, what is it?",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"egghatched1",
+                                "sentence":"CRAAACK? What is this CRAAACK? A wall? I will try moving another way... CRAAACK...",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"egghatched2",
+                                "sentence":"My head! This hurts! I'm sorrounded by walls! CRAAAAAAACK!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"egghatched3",
+                                "sentence":"I can't scape! I'm suffocating! I need to breathe!!! CRAAAAAAAAAAAAAAACK!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"At least out! Where am I? What is this place? Who am I? What am I????",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 2,
+                            "snakeSpeed": 2,
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('timingGame') > 1.5"],
+                                    "texts": ["'Last 1.5 sec ('+loadObjectiveStatiscs('timingGame').toFixed(2)+')'"],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Woooo! This is me moving! But... I can't stop! I will have to do anything to not collide. I had enough headache for today.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Hello there. I'm Agatha the Clever Owl. I will help you through your adventure. First things you have to know is how you can move.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Use the arrow keys or WASD in your keyboard. Try not to collide with the screen limits because that will kill you. Let's do some exercice.",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": []
+                                },
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('timesDown') >= 4", "loadObjectiveStatiscs('timesUp') >= 4", "loadObjectiveStatiscs('timesLeft') >= 4", "loadObjectiveStatiscs('timesRight') >= 4"],
+                                    "texts":["'4 times Down (' + Math.min(4, loadObjectiveStatiscs('timesDown')) + '/4)'",
+                                             "'4 times Up (' + Math.min(4, loadObjectiveStatiscs('timesUp')) + '/4)'",
+                                             "'4 times Left (' + Math.min(4, loadObjectiveStatiscs('timesLeft')) + '/4)'",
+                                             "'4 times Right (' + Math.min(4, loadObjectiveStatiscs('timesRight')) + '/4)'"],
+                                    "dialog": [
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Incredible! You made it! Now you are ready to face the dangers of this forest.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"But... I just born, how can I beat anything with this size? I will need help.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Ummmm, maybe you are right. Look! It seems that apples are falling from the sky. Try to eat some.",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": []
+                                },
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_apple') >= 5"],
+                                    "texts":["'Eat 5 Apples (' + Math.min(5, loadObjectiveStatiscs('objects_apple')) + '/5)'"],
+                                    "dialog": [
+                                        {
+                                            "character":"owl",
+                                            "sentence":"As you can see the more apples you eat the longer you are. This is important because to eat some animals you need to be bigger than them.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"I am soooo big now! I can eat anything. Come to me evil monsters!!!!!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Not so quick young grasshoper. Outside here there are terrifying creatures and there is a long way before being ready.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Sooooo... I'm a grasshoper! Can I jump? Can I jump?",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Ouch! I'm not here to tell you what you are, I'm only here to help you some basics to survive. Let's go!",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": [
+                                        {
+                                            "name":"apple",
+                                            "n": 1,
+                                            "position":"random",
+                                            "respawns": 5
+                                        }
+                                    ]
+                                }
+                            ]
+                            
+                            
+                        }
+                    },
+                    {
+                        "x":2,
+                        "y":4,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"owl",
+                                "sentence":"Maybe now you are bigger but you still are as slow as a snail",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Am I a sna...il???",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"This is something that you have to figure out. Now pay attention because there are monsters approaching and you have to be bigger to beat them.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"You have to eat at least 10 apples but at this speed you won't succeed. So take as many lightnings as you can to be quicker. I almost forgot! You have only 60 seconds.",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 5,
+                            "snakeSpeed": 2,
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_apple') >= 10", "loadObjectiveStatiscs('objects_lightning') >= 5"],
+                                    "texts": ["'Eat 10 Apples (' + Math.min(10, loadObjectiveStatiscs('objects_apple')) + '/10)'","'Take 5 Lightnings (' + Math.min(5, loadObjectiveStatiscs('objects_lightning')) + '/5)'"],
+                                    "objects": [
+                                        {
+                                            "name":"apple",
+                                            "n": 1,
+                                            "position":"random",
+                                            "respawns": 9
+                                        },
+                                        {
+                                            "name":"lightning",
+                                            "n": 1,
+                                            "position":"random",
+                                            "respawns": 9
+                                        }
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Congratulations, you did it on time! As you can see it is pretty difficult to not to collide at this velocity. You have to do fast movements but luckily you can queue actions!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":" So if you are going right and you press quickly up-and-left you change directions pretty fast. You can queue at anytime, even when you are stopped!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"I provided you some spiderwebs that will stop you during a while. Use them to queue 3 actions!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Wait! I almost forgot! your actions queued are displayed at your left panel, you can clear the entire queue at anytime pressing spacebar.",
+                                            "alignment":"right"
+                                        }
+                                    ],                                    
+                                    "time": 60
+                                },
+                                {
+                                    "conditions": ["_snaekDirection.length==3"],
+                                    "texts": ["'Queue 3 actions (' + _snaekDirection.length + '/3)'"],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"This is getting messy! I'm sorrounded by spiderwebs all around my body.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Get use to it because there are more comming!",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": [
+                                        {
+                                            "name":"spiderweb",
+                                            "n": 4,
+                                            "position":"random",
+                                            "respawns": 49
+                                        }
+                                    ]               
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":4,
+                        "y":7,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"spider",
+                                "sentence":"Who is destroying my spiderwebs? Is it you little snake?",
+                                "alignment":"left"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Snake! Snake! I'm a snake! Thank you, without a mirror it was difficult to say what I was.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"spider",
+                                "sentence":"Don't laugh at me. Sons capture him!",
+                                "alignment":"left"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Watch out, these little spiders aren't as much a challenge but they build spiderwebs and you don't want to be stuck forever.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Eliminate all the spiders before they sorround you with spiderwebs.",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 2,
+                            "snakeSpeed": 2,
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_spider') >= 10"],
+                                    "texts": ["'Eat 10 Spiders (' + Math.min(10, loadObjectiveStatiscs('objects_spider')) + '/10)'"],
+                                    "avoids": [{
+                                        "what":"countObject('spiderweb')>=20",
+                                        "text":"'20 spiderwebs (' + Math.min(20, countObject('spiderweb')) + '/20)'",
+                                        "red":"countObject('spiderweb')>=15"
+                                    }],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"That was pretty easy, no spider can beat me!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Wait a second, what is this increasing sound? Watch over there! More spiders are coming and they seem angry.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"spider",
+                                            "sentence":"Let's catch this snake. Tonight we will eat snake soup!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Try to take as many lightnings as you can to break the spiderwebs quickly or you will be sorrounded in no time!",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": [
+                                        {
+                                            "name":"spider",
+                                            "n": 2,
+                                            "position":"random",
+                                            "respawns": 4
+                                        },
+                                        {
+                                            "name":"apple",
+                                            "n": 1,
+                                            "position":"random",
+                                            "respawns": 9
+                                        },
+                                        {
+                                            "name":"lightning",
+                                            "n": 1,
+                                            "position":"random",
+                                            "respawns": 6
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_spider') >= 20"],
+                                    "texts": ["'Eat 20 Spiders (' + Math.min(20, loadObjectiveStatiscs('objects_spider')) + '/20)'"],
+                                    "avoids": [{
+                                        "what":"countObject('spiderweb')>=30",
+                                        "text":"'30 spiderwebs (' + Math.min(30, countObject('spiderweb')) + '/30)'",
+                                        "red":"countObject('spiderweb')>=20"
+                                    }],
+                                    "dialog": [
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Seems that it was all. Quickly, eliminate all the spiderwebs before some other animal get stuck in them.",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": [
+                                        {
+                                            "name":"spider",
+                                            "n": 4,
+                                            "position":"random",
+                                            "respawns": 4
+                                        },
+                                        {
+                                            "name":"lightning",
+                                            "n": 1,
+                                            "position":"random",
+                                            "respawns": 9
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": ["countObject('spiderweb') == 0"],
+                                    "texts": ["'Clear spiderwebs'"],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"After this I need a shower! And to rest a little, I'm exhausted!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Take your time and when ready we can go on.",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": []
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":8,
+                        "y":7.5,
+                        "r":1,
+                        "prelevel":[
+                            {
+                                "character":"owl",
+                                "sentence":"Seems that we have reached at the center of the problem. This seems to be the spider center, all spiders are born here.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Let's destroy it then! Now with my new abilities I'm able of anything.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"spider",
+                                "sentence":"Hahaha! Innocent snake, this house is impossible to destroy you will die trying... Spiders capture him!",
+                                "alignment":"left"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Two things you have to know before trying to destroy the house. First, each time you bite it you will decrease your length and the house resistance aswell.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Ok, I understand, so the larger I am the most damage I can do. And the second thing?",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"The second and most important thing is that you have to be big to destroy this house, if not you will die.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Remember this because it will apply to most of your enemies.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Ok, noted! But... how big I need to be to do not die?",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"At least 5 squares long, and think that with each bite you reduce your size. And meanwhile you have to avoid being captured by the spiders!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"spider",
+                                "sentence":"Enough chattering! Defense yourself!",
+                                "alignment":"left"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 5,
+                            "snakeSpeed": 2,
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_spiderhouse') >=1"],
+                                    "texts": ["'Destroy spiderhouse'"],
+                                    "boss": "spiderhouse",
+                                    "avoids": [{
+                                        "what":"countObject('spiderweb')>=40",
+                                        "text":"'40 spiderwebs (' + Math.min(40, countObject('spiderweb')) + '/40)'",
+                                        "red":"countObject('spiderweb')>=30"
+                                    }],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Yes! The spiderhouse is down! I won't see more spiders!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"You can't expect to not to find more spiders... we are in a forest, do you remember? But surely, they won't annoy as much next time.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Then... Let's get out of this forest! I need to see world and make new friends. Where is the way out?",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"No idea, but I think that snakes are supposed to life in a forest.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Nonsense! Follow me!",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": [
+                                        {
+                                            "name":"spiderhouse",                                            
+                                            "position":"fixed",
+                                            "pos":[[9,4]],                                            
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"lightning",
+                                            "n": 1,
+                                            "position":"random",
+                                            "respawns": 14
+                                        },
+                                        {
+                                            "name":"apple",
+                                            "n": 2,
+                                            "position":"random",
+                                            "respawns": 40
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":10.5,
+                        "y":6,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"owl",
+                                "sentence":"Oops... It seems that you have been bitten for a spider and the poison is taking effect just now.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Whaaaaaat!?!? I thought that I was inmune to spiders. What can I do now?",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"If you want to survive you need to maintain the poison levels under certain level. You will know that the poison is taken effect once your sight becomes green.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Eat medikits to lower the poison level in your blood. If you do it the poison will dissapear eventually...",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Eventually?? How long is it? A minute? A day?",
+                                "alignment":"right"                                
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"I'm sorry but I don't know...",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 5,
+                            "snakeSpeed": 2.5,
+                            "environment":{
+                                "base":0,
+                                "inc": 0.003,
+                                "topLimit": 1.0,
+                                "color": "#0f0"  
+                            },                              
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('timingGame') > 20"],
+                                    "texts": ["'Last 20 sec ('+loadObjectiveStatiscs('timingGame').toFixed(2)+')'"],
+                                    "avoids": [{
+                                        "what":"_environment > 0.8",
+                                        "text":"'Poison > 80%: ' + (_environment*100).toFixed(2) +'%'",
+                                        "red":"_environment >= 60"
+                                    }],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"I'm healing fast enough but how long will this last?",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"I made some calculations and in 30 seconds you will be healed.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"spider",
+                                            "sentence":"Spiders build some webs quickly, this snake has to die before he extinguish our entire species",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Now your task will be more difficult, take some lightnings to go faster.",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": [
+                                        {
+                                            "name":"medkit",
+                                            "n": 1,
+                                            "position":"random",
+                                            "respawns": 99
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('timingGame') > 30"],
+                                    "texts": ["'Last 30 sec ('+loadObjectiveStatiscs('timingGame').toFixed(2)+')'"],
+                                    "avoids": [{
+                                        "what":"_environment > 0.8",
+                                        "text":"'Poison > 80%: ' + (_environment*100).toFixed(2) +'%'",
+                                        "red":"_environment >= 60"
+                                    }],                                    
+                                    "objects": [
+                                        {
+                                            "name":"lightning",
+                                            "n": 1,
+                                            "position":"random",
+                                            "respawns": 9
+                                        },
+                                        {
+                                            "name":"spider",
+                                            "n": 3,
+                                            "position":"random",
+                                            "respawns": 4
+                                        }
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Oops... sorry. I rounded the result and instead of 30 seconds it was 1 minute... Seems that you will have to resist a little more.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Grrr.. Are you sure that you are correct this time?",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"100% positive...",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"And without rounding up the percentage?",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Ok maybe 51... Watch out! More spiders are coming!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"spider",
+                                            "sentence":"Chaaaaaaaaaaaaarge!!!!",
+                                            "alignment":"left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('timingGame') > 30"],
+                                    "texts": ["'Last 30 sec ('+loadObjectiveStatiscs('timingGame').toFixed(2)+')'"],
+                                    "avoids": [{
+                                        "what":"_environment > 0.8",
+                                        "text":"'Poison > 80%: ' + (_environment*100).toFixed(2) +'%'",
+                                        "red":"_environment >= 60"
+                                    }],                                    
+                                    "objects": [
+                                        {
+                                            "name":"spider",
+                                            "n": 3,
+                                            "position":"random",
+                                            "respawns": 9
+                                        }
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Wow that was close, but now I'm feeling better",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Yes, you're finally healed. Let's find a way out of this wicked forest.",
+                                            "alignment":"right"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":10,
+                        "y":2,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"owl",
+                                "sentence":"Seems that we reached a labyrinth. It is not too difficult, the only thing that you have to do to escape is to go through the hole",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"This seems easy, but there is a bunch of lightnings here, I will strike with some tree!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Remember you could use queued actions. When stuck in a spider web press twice right and once down to go two squares to the right and then down.",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 2,
+                            "snakeSpeed": 4,
+                            "objectives":[
+                                {
+                                    "conditions": ["countObject('hole') == 0"],
+                                    "texts": ["'Go through hole'"],
+                                    "objects": [
+                                        {
+                                            "name":"tree",                                            
+                                            "position":"fixed",
+                                            "pos":[[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1],[9,1],[10,1],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7],[10,7],[0,3],[1,3],[2,3],[3,3],[4,3],[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,2],[6,3],[6,4],[6,5],[8,3],[8,4],[8,5],[8,6],[10,2],[10,3],[10,4],[10,5],[10,6]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"lightning",                                            
+                                            "position":"fixed",
+                                            "pos":[[5,3],[5,2],[4,2],[3,2],[2,2],[1,2],[0,1],[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0],[11,1],[11,2],[11,3],[11,4],[11,5],[11,6],[11,7]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"spiderweb",                                            
+                                            "position":"fixed",
+                                            "pos":[[5,4],[0,2],[11,0],[11,8],[0,8],[7,6],[7,2]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"hole",                                            
+                                            "position":"fixed",
+                                            "pos":[[9,6]],
+                                            "respawns": 0
+                                        }
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Wow, I'm faster than light now!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Yes, and that is too dangerous. Take this pills and all will return to normality.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Thanks! I have a feeling that we are close to the forest end.",
+                                            "alignment":"right"
+                                        }
+                                    ]                                    
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":6,
+                        "y":3,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"snaek",
+                                "sentence":"The floor here seems different. It seems that a mosaic is revealed each time a pass through a square",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Maybe this image can help us to escape this forest. Try to reveal it.",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 2,
+                            "snakeSpeed": 2,
+                            "background": "bigtree",
+                            "objectives":[
+                                {
+                                    "conditions": ["100*_tilesRevealed/(12*8) >= 20"],
+                                    "texts": ["'20% Revealed: '+ Math.floor(100*_tilesRevealed/(12*8)) +'%'"],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"I still doesn't know what can it be. Any idea?",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Not yet but you'll have to be quicker because our friends are coming",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"spider",
+                                            "sentence":"This time you won't escape!",
+                                            "alignment":"left"
+                                        }
+                                    ],
+                                    "objects": []
+                                },
+                                {
+                                    "conditions": ["100*_tilesRevealed/(12*8) >= 50"],
+                                    "texts": ["'50% Revealed: '+ Math.floor(100*_tilesRevealed/(12*8)) +'%'"],
+                                    "avoids": [{
+                                        "what":"countObject('spiderweb')>=30",
+                                        "text":"'30 spiderwebs (' + Math.min(30, countObject('spiderweb')) + '/30)'",
+                                        "red":"countObject('spiderweb')>=20"
+                                    }],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Nothing yet? These spiders almost overwheel me!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"I have a slight idea, but reveal a little more to be sure. And watch out! More spiders are coming!",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": [
+                                        {
+                                            "name":"lightning",
+                                            "n": 5,
+                                            "position":"random",
+                                            "respawns": 4
+                                        },
+                                        {
+                                            "name":"spider",
+                                            "n": 5,
+                                            "position":"random",
+                                            "respawns": 0
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": ["100*_tilesRevealed/(12*8) >= 80"],
+                                    "texts": ["'80% Revealed: '+ Math.floor(100*_tilesRevealed/(12*8)) +'%'"],
+                                    "avoids": [{
+                                        "what":"countObject('spiderweb')>=30",
+                                        "text":"'30 spiderwebs (' + Math.min(30, countObject('spiderweb')) + '/30)'",
+                                        "red":"countObject('spiderweb')>=20"
+                                    }],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Each time there are more spiders. Do you see what it is the image now?",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Yes, it seems clear to me that it's a big tree. It has to be the one on the south. From here I can't see any other half as big as this one.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Let's go then!",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": [
+                                        {
+                                            "name":"spider",
+                                            "n": 5,
+                                            "position":"random",
+                                            "respawns": 1
+                                        }                                        
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":6,
+                        "y":5,
+                        "r":1.5,
+                        "prelevel":[
+                            {
+                                "character":"snaek",
+                                "sentence":"Ooooooh! This is the biggest tree I've ever seen!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Yes but you just born today! But I'm 176 years old and is the biggest tree I've ever seen too!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"eviltree",
+                                "sentence":"So you are the one that was eating my apples all day!",
+                                "alignment":"left"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"And... it has eyes! And it talks! And it seems to be evil evil evil!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"eviltree",
+                                "sentence":"No one disturbs me and live to tell!",
+                                "alignment":"left"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"This tree seems to be alive! And he controls all this forest at his will. It seems that we are screwed.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Then I will chop it down like the spiderhouse",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"You better do it quickly. One thing you have to know is that you need to be larger than 4 squares to damage him and you'll be shortened. And there is a little surprise...",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"What surprise?",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"If I tell you... where is the surprise? You will see as soon as he moves. Hint: he has two different moves!",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 5,
+                            "snakeSpeed": 2.2,
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_eviltree') >=1"],
+                                    "texts": ["'Cut Down the Evil Tree'"],
+                                    "boss": "eviltree",
+                                    "avoids": [{
+                                        "what":"countObject('spiderweb')>=30",
+                                        "text":"'30 spiderwebs (' + Math.min(30, countObject('spiderweb')) + '/30)'",
+                                        "red":"countObject('spiderweb')>=22"
+                                    }],
+                                    "dialog": [
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"Ohh! You defeated me! So you must be the legendary snaek!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"You spelled it wrong, I'm a snake! a snake!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"I'm never wrong! I meant that you are the one! The legendary Snaek: The snake! How old are you?",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"I'm less than a day old. But what you mean by legendary?",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"Oh my! Didn't you heard about the legend yet? Do you know what the three evil dragons are?",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Not a clue.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"I'll start with the beginning. Hundreds of years ago this was a pacefull land where all the animals and creatures lived happy. Until the dragons came!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"One day three mighty dragons came, spreeding evil and destruction. No creature was strong enough to face them. And they began to rule all the world.",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"Some animals became evil and obeyed the dragons, others became slaves, others hid waiting for better ages. Until the profecy appeared.",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"One day one of the slaves of the mighty dragons found an old scroll while he was minning gold. Its words spread quickly over the entire world as were words of hope.",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"And what did the scroll tell?",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"That a snake would born soon. A powerful and brave snake that would face the dragons and defeat the three of them restoring the peace in the world.",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"The dragons forbid to every living creature in the world talking about the snake and offered tons of gold to the creature that kills more snakes at the end of the year.",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"So the people put a name to the snake: Snaek. So they can talk about the profecy without suspicion.",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"And you have to be Snaek. You are the first snake, and the first creature, that beated me since the dragons rule the world. So there is still hope.",
+                                            "alignment":"left"
+                                        },                                        
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"So now that I finally can get out of this forest and I'm exhausted of killing spiders I have to kill no one dragon no... three of them! And I don't know where to begin.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Seems that this sums it up pretty well.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"Yes, the dragons are hidden and few creatures know they whereabouts. But you can begin crossing this desert and going to the jungle. There are misterious things happening there.",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"eviltree",
+                                            "sentence":"And be alert because all his minions will attack you showing no mercy. Now I have to go. Good luck!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Nice trick! The tree just disappeared leaving a cloud of smoke. We will have to check if he said the true. Let's cross this desert!",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": [
+                                        {
+                                            "name":"eviltree",                                            
+                                            "position":"fixed",
+                                            "pos":[[9,4]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"tree",
+                                            "n":10,
+                                            "position":"random",                                            
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"apple",
+                                            "n":3,
+                                            "position":"random",                                            
+                                            "respawns": 19
+                                        },
+                                        {
+                                            "name":"lightning",
+                                            "n":2,
+                                            "position":"random",                                            
+                                            "respawns": 9
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "name":"The Long Desert",
+                "background":"desert",
+                "levels":[
+                    {
+                        "x":6,
+                        "y":8,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"snaek",
+                                "sentence":"At least we got out of the forest! But this desert seems endless. It is way bigger than the forest.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Yes, it is. Now you have plenty more room to move. And the wildlife is different, you will find less apples here.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Then how will I grow up? Apples are delicious!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"You will find grapes here! Grapes are better than apples. Each grape make you grow two squares instead of one. Try to reach a length of 25.",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 2,
+                            "snakeLength": 5,
+                            "snakeSpeed": 3,
+                            "objectives":[
+                                {
+                                    "conditions": ["_snaekLength >= 25"],
+                                    "texts": ["'Length ('+_snaekLength+'/25)'"],
+                                    "objects": [
+                                        {
+                                            "name":"orange wall",                                            
+                                            "position":"forced",
+                                            "pos":[[10,7],[10,8],[10,9],[11,6],[11,7],[11,8],[11,9],[12,5],[12,6],[12,7],[12,8],[13,5],[13,6],[13,7]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"grapes",
+                                            "n":5,
+                                            "position":"random",                                            
+                                            "respawns": 1
+                                        },
+                                        {
+                                            "name":"lightning",
+                                            "n":4,
+                                            "position":"random",                                            
+                                            "respawns": 5
+                                        }                                        
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"You were right! Eating grapes I grow quicker! But I need to go faster than before, the map is twice as big now.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Yes but if you go fast then you will have a problem going through narrow spaces. Let me show you a little trick. First of all reach a speed of at least 12 squares a second.",
+                                            "alignment":"right"
+                                        }
+                                    ]                                    
+                                },
+                                {
+                                    "conditions": ["_snaekMaxSpeed >= 12"],
+                                    "texts": ["'Speed ('+_snaekMaxSpeed+'/12)'"],
+                                    "objects": [
+                                        {
+                                            "name":"lightning",
+                                            "n":4,
+                                            "position":"random",                                            
+                                            "respawns": 5
+                                        }
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Ok, that was easy but now what's next?",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Do you see that bunch of walls in the middle of the field? I'll create a narrow passage and put grapes inside. You'll have to eat all of them.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"But that's impossible at this speed. I will crush into the wall!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Here is your lesson today: The speed you are going now it's your maximum speed but with a little of practice you can go slower.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Thats great! Show me how!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"You can press Z or K to decrease your speed but never slower than 2 squares per second. And if you want to go quicker you can press X or L. I will display your speed in the left panel.",
+                                            "alignment":"right"
+                                        }
+                                    ]                                    
+                                },
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_grapes') >= 6"],
+                                    "texts": ["'Grapes ('+loadObjectiveStatiscs('objects_grapes')+'/6)'"],
+                                    "objects": [
+                                        {
+                                            "name":"grapes",                                            
+                                            "position":"forced",
+                                            "pos":[[10,8],[11,7],[11,8],[12,6],[12,7],[13,6]],
+                                            "respawns": 0
+                                        }
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Now I'm able to control my speed much better. I'll not crush anymore!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Then we can go on!",
+                                            "alignment":"right"
+                                        }
+                                    ]                                    
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":10,
+                        "y":7,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"scorpion",
+                                "sentence":"What are you doing here? You belong to that forest and you aren't supposed to be here.",
+                                "alignment":"left"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"I'm looking for some dragon... Do you know one?",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"scorpion",
+                                "sentence":"I see... so you are the Legendary Snaek, Scorpions kill him!",
+                                "alignment":"left"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"The tree warned us. All criatures will try to kill you. Kill 10 scorpions before they kill you.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"They will try to sting you once they are close to your body. If they sting you when you are 5 squares long or shorter you will die, if not, your size will decrease.",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"So I have to stay far from them but I have to eat them anyway... Let's try it!",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 2,
+                            "snakeLength": 10,
+                            "snakeSpeed": 4,
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_scorpion') >= 10"],
+                                    "texts": ["'Scorpions ('+loadObjectiveStatiscs('objects_scorpion')+'/10)'"],
+                                    "objects": [
+                                        {
+                                            "name":"grapes",
+                                            "n":5,
+                                            "position":"random",                                            
+                                            "respawns": 1
+                                        },
+                                        {
+                                            "name":"lightning",
+                                            "n":2,
+                                            "position":"random",                                            
+                                            "respawns": 3
+                                        },
+                                        {
+                                            "name":"scorpion",
+                                            "n":10,
+                                            "position":"random",                                            
+                                            "respawns": 0
+                                        }
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"scorpion",
+                                            "sentence":"Maybe you can beat us if we are alone but wait for the reinforcements. Spiders come here!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"spider",
+                                            "sentence":"Joining our efforts we will reduce this slippery snake!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Now the spiders will help the scorpions and it will become more difficult to not being sting. Try to eat 15 spiders and 15 scorpions in less than 90 seconds to frighten them",
+                                            "alignment":"right"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_scorpion') >= 15","loadObjectiveStatiscs('objects_spider') >= 15"],
+                                    "texts": ["'Scorpions ('+Math.min(loadObjectiveStatiscs('objects_scorpion'),15)+'/15)'", "'Spiders ('+Math.min(loadObjectiveStatiscs('objects_spider'),15)+'/15)'"],
+                                    "objects": [
+                                        {
+                                            "name":"grapes",
+                                            "n":4,
+                                            "position":"random",                                            
+                                            "respawns": 3
+                                        },
+                                        {
+                                            "name":"lightning",
+                                            "n":2,
+                                            "position":"random",                                            
+                                            "respawns": 3
+                                        },
+                                        {
+                                            "name":"scorpion",
+                                            "n":5,
+                                            "position":"random",                                            
+                                            "respawns": 5
+                                        },
+                                        {
+                                            "name":"spider",
+                                            "n":5,
+                                            "position":"random",                                            
+                                            "respawns": 5
+                                        }
+                                    ],
+                                    "time": 90,
+                                    "dialog": [
+                                        {
+                                            "character":"spider",
+                                            "sentence":"Retreat! he is killing all of us! We need a better strategy",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"scorpion",
+                                            "sentence":"I'm sure we will meet later and you won't be so lucky next time.",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Sure... I'll be waiting for it.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"We can go to that pyramid over there. Maybe we will find some clue or where to find the dragons.",
+                                            "alignment":"right"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":5,
+                        "y":6,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"snaek",
+                                "sentence":"Oh my good! Boombs!!!! Everybody to the ground!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Ehem.. you already are to the ground...",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Oops! It's true!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Don't be afraid of these bombs, they can seem dangerous but you are totally inmune to them. Try to explode 5 of them",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 2,
+                            "snakeLength": 5,
+                            "snakeSpeed": 5,
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_bomb') >= 5"],
+                                    "texts": ["'Explode bombs ('+loadObjectiveStatiscs('objects_bomb')+'/5)'"],
+                                    "objects": [
+                                        {
+                                            "name":"orange wall",                                            
+                                            "position":"forced",
+                                            "pos":[[3,14],[3,15],[3,16],[3,17],[4,14],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,14],[12,14],[13,14],[14,14],[15,14],[16,14],[17,14],[17,15],[17,16],[17,17]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"blue wall",                                            
+                                            "position":"forced",
+                                            "pos":[[4,15],[4,16],[4,17],[5,15],[5,16],[5,17],[6,15],[6,16],[6,17]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"green wall",                                            
+                                            "position":"forced",
+                                            "pos":[[7,15],[7,16],[7,17],[8,15],[8,16],[8,17],[9,15],[9,16],[9,17]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"yellow wall",                                            
+                                            "position":"forced",
+                                            "pos":[[10,15],[10,16],[10,17],[11,15],[11,16],[11,17],[12,15],[12,16],[12,17]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"white wall",                                            
+                                            "position":"forced",
+                                            "pos":[[13,15],[13,16],[13,17],[14,15],[14,16],[14,17],[15,15],[15,16],[15,17],[16,15],[16,17]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"grapes",                                            
+                                            "position":"forced",
+                                            "pos":[[16,16]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"bomb",
+                                            "n":1,
+                                            "position":"random",                                            
+                                            "respawns": 4
+                                        }
+                                    ],
+                                    "dialog":[
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Yeah! I can eat bombs and nothings happen to me! But... nothing happens at all!!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Bombs are usefull in plenty of situations. For example: Did you see these grapes covered by walls?",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Yes, these grapes are very well protected, nobody can eat them!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"You, with the help of some bombs will eat them!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"I'm already hungry to try it!",
+                                            "alignment":"right"
+                                        }
+                                    ]                                    
+                                },
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_grapes') >= 1"],
+                                    "texts": ["'Eat grapes ('+loadObjectiveStatiscs('objects_grapes')+'/1)'"],
+                                    "objects": [
+                                        {
+                                            "name":"empty",                                            
+                                            "position":"forced",
+                                            "pos":[[3,16],[4,16],[6,16],[7,16],[9,16],[10,16],[12,16],[13,16]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"bomb",                                            
+                                            "position":"forced",
+                                            "pos":[[5,16],[8,16],[11,16],[14,16]],
+                                            "respawns": 0
+                                        }                                        
+                                    ],
+                                    "dialog":[
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Let me write it down: When hitted by a bomb blue walls become green, green ones become yellow, yellow become white and whites are destroyed!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"You are right, now you know one use of bombs but you'll find more soon enough!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Seems like this is an entrance to the pyramid!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"You just found a secret entrance eating these grapes! It's a direct passage to the faraons tomb.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Let's ask the pharaon where the dragons are!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"I don't know if this is a good idea...",
+                                            "alignment":"right"
+                                        }
+                                    ]                                    
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":6,
+                        "y":4,
+                        "r":1,
+                        "prelevel":[
+                            {
+                                "character":"snaek",
+                                "sentence":"Ouch!..BOOOM!...Ow!...CRACK!...",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Watch out! These passages are slippery! And the stairs...",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Youch!...Patabooom! Late warning! I just landed in a tiny tiny room!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Then the pharaon will be near...",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"mummy",
+                                "sentence":"Who dares to disturb my millenary sleep?",
+                                "alignment":"left"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"This doesn't seem like a pharaon!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"mummy",
+                                "sentence":"I was a pharaon many centuries ago. But once I died I was buried here and sleep forever after. Until NOW!!!!",
+                                "alignment":"left"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"Sorry, then you won't know where to find the dragons?",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"mummy",
+                                "sentence":"What dragons are you talking about? I don't know a thing about dragons!",
+                                "alignment":"left"
+                            },
+                            {
+                                "character":"snaek",
+                                "sentence":"I see... you can sleep on, we will go now. Let's go owl!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"mummy",
+                                "sentence":"Not so quick! You awake me, now you must die!",
+                                "alignment":"left"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"It seems like we are on trouble. Use bombs to break the walls that sorrounds the mummy and then kill him with a couple of bombs. But be alert because he can summom creatures meanwhile!",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"And try not to crush at the beginning, you have a wall just in front of you!",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 10,
+                            "snakeSpeed": 3,
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_mummy') >=1"],
+                                    "texts": ["'Kill The Mummy'"],
+                                    "boss": "mummy",
+                                    "objects": [
+                                        {
+                                            "name":"mummy",                                            
+                                            "position":"forced",
+                                            "pos":[[7,4]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"orange wall",                                            
+                                            "position":"forced",
+                                            "pos":[[7,3],[7,5],[6,4],[8,4]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"blue wall",                                            
+                                            "position":"forced",
+                                            "pos":[[6,3],[6,5],[8,3],[8,5]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"green wall",                                            
+                                            "position":"forced",
+                                            "pos":[[5,4],[9,4],[7,2],[7,6]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"yellow wall",                                            
+                                            "position":"forced",
+                                            "pos":[[5,3],[5,5],[9,3],[9,5],[6,2],[8,2],[6,6],[8,6]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"white wall",                                            
+                                            "position":"forced",
+                                            "pos":[[5,2],[5,6],[9,2],[9,6]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"apple",
+                                            "n":1,
+                                            "position":"random",                                            
+                                            "respawns": 99
+                                        },
+                                        {
+                                            "name":"bomb",
+                                            "n":5,
+                                            "position":"random",                                            
+                                            "respawns": 99
+                                        },
+                                        {
+                                            "name":"lightning",
+                                            "n":1,
+                                            "position":"random",                                            
+                                            "respawns": 14
+                                        }
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"mummy",
+                                            "sentence":"Nooo, I hate bombs! I'm dying! Don't kill me please! I'll tell you all I know about dragons!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Ummm but you said you didn't know anything... Don't try to cheat on me!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"mummy",
+                                            "sentence":"My information is from at least 2000 years ago but maybe it's still reliable. When I was alive there where few people that said that they had seen dragons.",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Interesting... I'll let you finish your story and if I think you are lying to me I will throw you another bomb.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"mummy",
+                                            "sentence":"Glups....I have no option I guess... Everybody thought that these people were mad or under the effect of some sorcery. So no one take them seriously.",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"mummy",
+                                            "sentence":"They all said that dragons were peacefull and lovely creatures and...",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Wait a moment! Dragons are evil! At least now... Tell me where they found these dragons and I'll check for myself.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"mummy",
+                                            "sentence":"Nobody knows exactly but all the people that saw dragons came from the river that flows in the oasis behind the dunes.",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Seems and interesting place to start our search.",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Ok, tell me how to get out of this pyramid and how to go to this oasis and I will leave you rest.",
+                                            "alignment":"snaek"
+                                        },
+                                        {
+                                            "character":"mummy",
+                                            "sentence":"(Mummy do a strange noise and a door opens). Follow that door and turn right you will be there before dawn. Bye. (And the mummy put himself to sleep).",
+                                            "alignment":"left"
+                                        }
+                                    ]                                    
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":1,
+                        "y":7.5,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"snaek",
+                                "sentence":"I think that we are lost! I see everything like 2 hours ago, maybe we are doing circles...",
+                                "alignment":"right"
+                            },
+                            {
+                                "character":"owl",
+                                "sentence":"Let me fly higher... Wooooow a desert storm is coming. You have to use glasses or you will go blind!",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 2,
+                            "snakeLength": 10,
+                            "snakeSpeed": 4,
+                            "environment":{
+                                "base":0,
+                                "inc": 0.003,
+                                "topLimit": 1.0,
+                                "color": "#d82"  
+                            }, 
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_glasses') >= 5"],
+                                    "texts": ["'Glasses ('+loadObjectiveStatiscs('objects_glasses')+'/5)'"],
+                                    "avoids": [{
+                                        "what":"_environment > 0.8",
+                                        "text":"'Sand > 80%: ' + (_environment*100).toFixed(2) +'%'",
+                                        "red":"_environment >= 60"
+                                    }],
+                                    "objects": [
+                                        {
+                                            "name":"hole",                                            
+                                            "position":"forced",
+                                            "pos":[[15,6]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"orange wall",
+                                            "position":"forced",
+                                            "pos":[[14,5],[14,6],[14,7],[15,5],[15,7],[16,5],[16,6],[16,7]],
+                                            "respawns": 0
+                                        },
+                                        {
+                                            "name":"glasses",
+                                            "n":2,
+                                            "position":"random",                                            
+                                            "respawns": 99
+                                        },
+                                        {
+                                            "name":"grapes",
+                                            "n":1,
+                                            "position":"random",                                            
+                                            "respawns": 99
+                                        },
+                                        {
+                                            "name":"lightning",
+                                            "n":1,
+                                            "position":"random",                                            
+                                            "respawns": 19
+                                        }
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"scorpion",
+                                            "sentence":"Hahaha! Now you are helpless. We are used to live with these storms. Scorpions! Spiders! Attack now!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"spider",
+                                            "sentence":"But we are not used to this sand. Our four pair of eyes will get hurt!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"scorpion",
+                                            "sentence":"Hurt? Tell the dragon that you flew away and you will know the meaning of the word hurt!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"Try to kill some spiders and scorpions like before. With luck this will scare them!",
+                                            "alignment":"right"
+                                        }
+                                    ]                                    
+                                },
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_scorpion') >= 10","loadObjectiveStatiscs('objects_spider') >= 10"],
+                                    "texts": ["'Scorpions ('+Math.min(loadObjectiveStatiscs('objects_scorpion'),10)+'/10)'", "'Spiders ('+Math.min(loadObjectiveStatiscs('objects_spider'),10)+'/10)'"],
+                                    "avoids": [{
+                                        "what":"_environment > 0.8",
+                                        "text":"'Sand > 80%: ' + (_environment*100).toFixed(2) +'%'",
+                                        "red":"_environment >= 60"
+                                    }],
+                                    "objects": [                                        
+                                        {
+                                            "name":"scorpion",
+                                            "n":5,
+                                            "position":"random",                                            
+                                            "respawns": 99
+                                        },
+                                        {
+                                            "name":"spider",
+                                            "n":5,
+                                            "position":"random",                                            
+                                            "respawns": 99
+                                        },
+                                        {
+                                            "name":"grapes",
+                                            "n":1,
+                                            "position":"random",                                            
+                                            "respawns": 99
+                                        }
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"scorpion",
+                                            "sentence":"Keep on! The snake is weaker, all at once, now!!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Seems hopeless, they don't surrender this time!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"The sand seems that has weakened these walls! Try to destroy them with bombs, maybe you can hide in that hole!",
+                                            "alignment":"right"
+                                        }
+                                    ]                                    
+                                },
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('objects_hole') >= 1"],
+                                    "texts": ["'Go through the hole!'"],
+                                    "avoids": [{
+                                        "what":"_environment > 0.8",
+                                        "text":"'Sand > 80%: ' + (_environment*100).toFixed(2) +'%'",
+                                        "red":"_environment >= 60"
+                                    }],
+                                    "objects": [                                        
+                                        {
+                                            "name":"scorpion",
+                                            "n":2,
+                                            "position":"random",                                            
+                                            "respawns": 99
+                                        },
+                                        {
+                                            "name":"spider",
+                                            "n":2,
+                                            "position":"random",                                            
+                                            "respawns": 99
+                                        },
+                                        {
+                                            "name":"bomb",
+                                            "n":30,
+                                            "position":"random",                                            
+                                            "respawns": 99
+                                        },
+                                        {
+                                            "name":"yellow wall",
+                                            "position":"forced",
+                                            "pos":[[14,5],[14,6],[14,7],[15,5],[15,7],[16,5],[16,6],[16,7]],
+                                            "respawns": 0
+                                        }
+                                    ],
+                                    "dialog": [
+                                        {
+                                            "character":"scorpion",
+                                            "sentence":"Damn! He scaped! The dragons will be furious!",
+                                            "alignment":"left"
+                                        },
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"I achieved it! It seems that is not only a hole, it seems that is a hidden passage. I hope that it don't return us to the pyramid!",
+                                            "alignment":"right"
+                                        },
+                                        {
+                                            "character":"owl",
+                                            "sentence":"There is only one way to know...",
+                                            "alignment":"right"
+                                        }
+                                    ]                                    
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "stop":true,
+                        "x":3.5,
+                        "y":7,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"egg",
+                                "sentence":"Why is so dark here? I will try to move a little... CRAAACK... Ouch, what is it?",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 2,
+                            "snakeSpeed": 2,
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('timingGame') > 1.5"],
+                                    "texts": ["'Last 1.5 sec ('+loadObjectiveStatiscs('timingGame').toFixed(2)+')'"],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Woooo! This is me moving! But... I can't stop! I will have to do anything to not collide. I had enough headache for today.",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": [
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":1,
+                        "y":4,
+                        "r":0.6,
+                        "prelevel":[
+                            {
+                                "character":"egg",
+                                "sentence":"Why is so dark here? I will try to move a little... CRAAACK... Ouch, what is it?",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 2,
+                            "snakeSpeed": 2,
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('timingGame') > 1000"],
+                                    "texts": ["'Last 1.5 sec ('+loadObjectiveStatiscs('timingGame').toFixed(2)+')'"],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Woooo! This is me moving! But... I can't stop! I will have to do anything to not collide. I had enough headache for today.",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": [
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "x":3,
+                        "y":3,
+                        "r":1.5,
+                        "prelevel":[
+                            {
+                                "character":"egg",
+                                "sentence":"Why is so dark here? I will try to move a little... CRAAACK... Ouch, what is it?",
+                                "alignment":"right"
+                            }
+                        ],
+                        "level":{
+                            "scale": 1,
+                            "snakeLength": 2,
+                            "snakeSpeed": 2,
+                            "objectives":[
+                                {
+                                    "conditions": ["loadObjectiveStatiscs('timingGame') > 1.5"],
+                                    "texts": ["'Last 1.5 sec ('+loadObjectiveStatiscs('timingGame').toFixed(2)+')'"],
+                                    "dialog": [
+                                        {
+                                            "character":"snaek",
+                                            "sentence":"Woooo! This is me moving! But... I can't stop! I will have to do anything to not collide. I had enough headache for today.",
+                                            "alignment":"right"
+                                        }
+                                    ],
+                                    "objects": []
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },{
+        "name":"The Revenge",
+        "source":"/snaek/img/story/stages/evilwizard.png",
+        "w":4,
+        "h":3,
+        "characters":{
+            
+        },
+        "backgrounds":{
+            
+        },
+        "stages":[
+        ]   
+    }
+]

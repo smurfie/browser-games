@@ -1,0 +1,23 @@
+{
+  "name": "browser-games",
+  "version": "1.0.0",
+  "description": "Browser games collection",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smurfie/browser-games.git"
+  },
+  "author": "Joan Fluvia <joanfluvia@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smurfie/browser-games/issues"
+  },
+  "homepage": "https://github.com/smurfie/browser-games#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  }
+}

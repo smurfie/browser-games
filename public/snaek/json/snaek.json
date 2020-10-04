@@ -1,0 +1,780 @@
+{
+    "items":{
+        "apple":{
+            "source": "/snaek/img/sprites/apple.svg",
+            "eatable": true,
+            "beforeImpact": "incSnaekLength(1)",
+            "afterImpact": "",
+            "description":"Each time you eat an apple you grow a square. Probably the first fruit you'll ever eat!"
+        },
+        "bomb":{
+            "source": "/snaek/img/sprites/bomb.svg",
+            "eatable": true,
+            "beforeImpact": "",
+            "afterImpact": "bombExplosion(x, y)",
+            "description":"Don't be afraid to eat a bomb, they don't hurt you. They are very useful revealing tiles in some levels and breaking walls in another. And some bosses are afraid of them!"
+        },
+        "glasses":{
+            "source": "/snaek/img/sprites/glasses.svg",
+            "eatable": true,
+            "beforeImpact": "",
+            "afterImpact": "incEnvironment(-0.2)",
+            "description":"With these incredible resistent glasses you will see better and look cooler! Even in desert storms! Buy one and get one free!"
+        },
+        "grapes":{
+            "source": "/snaek/img/sprites/grapes.svg",
+            "eatable": true,
+            "beforeImpact": "incSnaekLength(2)",
+            "afterImpact": "",
+            "description":"These grapes are trully healthy. Each time you eat one you grow 2 squares."
+        },
+        "hole":{
+            "source": "/snaek/img/sprites/hole.svg",
+            "eatable": true,
+            "beforeImpact": "",
+            "afterImpact": "",
+            "description":"Once you fall in one of these you complete the level! Only found in labyrinths."
+        },
+        "lightning":{
+            "source": "/snaek/img/sprites/lightning.svg",
+            "eatable": true,
+            "beforeImpact": "",
+            "afterImpact": "incSnaekMaxSpeed(0.25)",
+            "description":"If eaten it will bring you a little more energy and you'll be quicker. Watch out because if you go too fast you'll become uncontrollable."
+        },
+        "medkit":{
+            "source": "/snaek/img/sprites/medkit.svg",
+            "eatable": true,
+            "beforeImpact": "",
+            "afterImpact": "incEnvironment(-0.2)",
+            "description":"Usefull if you become poisoned. It will reduce the poison in your blood. Better avoid these spiders next time!"
+        },
+        "orange portal":{
+            "source": "/snaek/img/sprites/portalorange.svg",
+            "eatable": false,
+            "beforeImpact": "i=findObject('portalblue');next=[_objects[i][0],_objects[i][1], opposite(snaekDirection), snaekDirection];;if (!nextSnaekMovement(next, snaekDirection)){gameOver();}doSnakeMovement(next);value='portalorange'",
+            "afterImpact": "",
+            "description":"If you want to take an adventure to another dimension travel through one of these. It will teleport you directly to the blue portal."
+        },
+        "blue portal":{
+            "source": "/snaek/img/sprites/portalblue.svg",
+            "eatable": false,
+            "beforeImpact": "i=findObject('portalorange');next=[_objects[i][0],_objects[i][1], opposite(snaekDirection), snaekDirection];if (!nextSnaekMovement(next, snaekDirection)){gameOver();}doSnakeMovement(next);value='portalblue'",
+            "afterImpact": "",
+            "description":"If you want to take an adventure to another dimension travel through one of these. It will teleport you directly to the orange portal."
+        },
+        "reverse":{
+            "source": "/snaek/img/sprites/reverse.svg",
+            "eatable": true,
+            "beforeImpact": "",
+            "afterImpact": "reverseSnaek()",
+            "description":"Sometimes your best option is to go back. Eat one of these and your head and your tail will be inverted! Be sure to don't have your tail next to a wall!"
+        },
+        "tree":{
+            "source": "/snaek/img/sprites/tree.svg",
+            "eatable": false,
+            "beforeImpact": "",
+            "afterImpact": "gameOver()",
+            "description":"Usually found in the forests, trees are hard to break with your head, you will die if you try to chop down one of these."
+        },        
+        "spiderweb":{
+            "source": "/snaek/img/sprites/spiderweb.svg",
+            "eatable": true,
+            "beforeImpact": "",
+            "afterImpact": "setTurnsStop(5)",
+            "description":"Spiders will try to catch you using their webs but they only stop you for 5 turns. So the faster you go the lesser time you'll be trapped! In some levels too much of these will make you lose."
+        },
+        "snow":{
+            "source": "/snaek/img/sprites/snow.svg",
+            "eatable": true,
+            "beforeImpact": "",
+            "afterImpact": "setTurnsSliding(1)",
+            "description":"Snow is slippery! If you pass through a snowed square you will slide to the next one. They can be very dangerous lined up!"
+        },
+        "orange wall":{
+            "source": "/snaek/img/sprites/wallorange.png",
+            "eatable": false,
+            "beforeImpact": "",
+            "afterImpact": "gameOver()",
+            "description":"A totally normal orange wall. It's unbreakable."
+        },
+        "blue wall":{
+            "source": "/snaek/img/sprites/wallblue.png",
+            "eatable": false,
+            "beforeImpact": "",
+            "afterImpact": "gameOver()",
+            "description":"The blue wall can seem unbreakable at first sight. But with perseverance even the tallest walls have fallen."
+        },
+        "green wall":{
+            "source": "/snaek/img/sprites/wallgreen.png",
+            "eatable": false,
+            "beforeImpact": "",
+            "afterImpact": "gameOver()",
+            "description":"This green wall can take a few bombs but eventually it will collapse."
+        },
+        "white wall":{
+            "source": "/snaek/img/sprites/wallwhite.png",
+            "eatable": false,
+            "beforeImpact": "",
+            "afterImpact": "gameOver()",
+            "description":"A poorly constructed white wall. Maybe we can destroy it with a bomb."
+        },
+        "yellow wall":{
+            "source": "/snaek/img/sprites/wallyellow.png",
+            "eatable": false,
+            "beforeImpact": "",
+            "afterImpact": "gameOver()",
+            "description":"A wall painted in yellow. More resistent than the white wall but nothing too resistant."
+        }
+    },
+    "enemies":{
+        "eviltree":{
+            "source": "/snaek/img/sprites/eviltree.svg",
+            "speed": 0.2,
+            "points": 1000,
+            "eatable": false,
+            "life": 10,
+            "beforeImpact": "if(getSnaekLength()<5){gameOver();}else{incSnaekLength(-1);if(decreaseLife(x,y,1)){deleteObject(x, y, true);_snaek.push(next);setGrid(x, y, _SNAEK);}}",
+            "afterImpact": "",
+            "preMove": "",
+            "move": "teleportMove(pos)",
+            "postMove": "if(Math.random()>0.15){deleteObjects('tree');createObjects(10,'tree',0)}else{createObjects(2,'spider',1)}",
+            "description":"BOSS: Eviltree is evil and it's a tree! It's found sorrounded for other trees and moves teleporting from one square to another and when he moves all other trees do the same. From time to time 2 spiders fall from his leaves."
+        },
+        "mouse":{
+            "source": "/snaek/img/sprites/mouse.svg",
+            "speed": 0.5,            
+            "points": 200,
+            "eatable": true,
+            "beforeImpact": "if(getSnaekLength()<5){gameOver();}",
+            "afterImpact": "incSnaekLength(-1)",
+            "preMove": "",
+            "move": "randomMove(pos)",
+            "postMove": "",
+            "description":"What can I tell you of mice? They like cheese.. and snakes! Watch out because if you aren't at least 5 squares long he will eat you and if you are he will only eat one of your squares before being eated."
+        },
+        "mummy":{
+            "source": "/snaek/img/sprites/mummy.svg",
+            "speed": 0.5,            
+            "points": 2000,
+            "life": 10,
+            "eatable": true,
+            "beforeImpact": "if(getSnaekLength()<5){gameOver();}else{incSnaekLength(-1);}",
+            "afterImpact": "",
+            "preMove": "",
+            "move": "var dice=Math.random();if(dice<0.15){createObjects(1,'scorpion',0);}else if(dice<0.3){createObjects(1,'spider',0);}randomMove(pos)",
+            "postMove": "",
+            "description":"Mummys are immortal creatures but they are pretty weak against bombs. They are commonly protected by walls to avoid being destroyed. They can summon scorpions and spiders. So you'll have to use bombs meanwhile you kill the creatures summoned."
+        },
+        "lightbug":{
+            "source": "/snaek/img/sprites/lightbug.svg",
+            "speed": 1.5,
+            "points": 300,
+            "eatable": false,
+            "life": 10,
+            "beforeImpact": "",
+            "afterImpact": "incEnvironment(-0.3)",
+            "preMove": "",
+            "move": "randomMove(pos)",
+            "postMove": "",
+            "description":"In dark places you'll need to find these ones to light your way. Catching them is another issue, you'll need to be fast."
+        },
+        "scorpion":{
+            "source": "/snaek/img/sprites/scorpion.svg",
+            "speed": 1,
+            "points": 300,
+            "eatable": true,
+            "beforeImpact": "",
+            "afterImpact": "",
+            "preMove": "",
+            "move": "if(Math.random()<0.1){teleportMove(pos);}else{randomAttackMove(pos);}",
+            "postMove": "",
+            "description":"Scorpions try to sting you, if they do your length is decreased by one and if you are 5 or less squares long you die. Sometimes they disappear under the sand and appear in another place."
+        },
+        "spider":{
+            "source": "/snaek/img/sprites/spider.svg",
+            "speed": 0.5,
+            "points": 200,
+            "eatable": true,
+            "beforeImpact": "",
+            "afterImpact": "",
+            "preMove": "if(Math.random()<0.2){create='spiderweb';}",
+            "move": "randomMove(pos);",
+            "postMove": "",
+            "description":"They seem scary and they can be overwheelming in large groups. Kill them quickly before they sorround you with their webs. Some species can be poisonous."
+        },
+        "spiderhouse":{
+            "source": "/snaek/img/sprites/spiderhouse.svg",
+            "speed": 0.25,
+            "points": 1000,
+            "eatable": false,
+            "life": 20,
+            "beforeImpact": "if(getSnaekLength()<5){gameOver();}else{incSnaekLength(-1);if(decreaseLife(x,y,1)){_snaek.push(next);setGrid(x, y, _SNAEK);}}",
+            "afterImpact": "",
+            "preMove": "if(Math.random()<0.5){createObjects(1,'spider',0);}",
+            "move": "false",
+            "postMove": "",
+            "description":"MiniBOSS: Surprisingly is where spiders live, so be prepared to find lots of spiders around. Like almost all bosses you need to be at least 5 squares long to not to die once you collide him and then your length and his life will be reduced."
+        },
+        "chessknight":{
+            "source": "/snaek/img/sprites/chessknight.svg",
+            "speed": 0.3,
+            "points": 2000,
+            "eatable": false,
+            "beforeImpact": "if(getSnaekLength()<5){gameOver();}else{incSnaekLength(-1);}",
+            "afterImpact": "",
+            "preMove": "",
+            "move": "knightMove(i, pos)",
+            "postMove": "if(!move){deleteObject(x,y,true);}",
+            "description":"BOSS: If you never played chess before you are screwed. The only way to kill the knight is to avoid that he moves and he moves like a chess knight 2 squares one way and 1 square perpendicular."
+        },
+        "penguin":{
+            "source": "/snaek/img/sprites/penguin.svg",
+            "speed": 5,
+            "points": 200,
+            "eatable": true,
+            "beforeImpact": "",
+            "afterImpact": "",
+            "preMove": "if(Math.random()<0.1){create='snow';}",
+            "move": "randomMove(pos);",
+            "postMove": "",
+            "description":"Penguins like cold places and if the place is not cold enough they leave snow in their way. They move faster than anything you've ever seen so killing them will be as playing tag."
+        }
+    },
+    "images":{
+        "beta":{"source": "/snaek/img/general/beta.png"},
+        "checked-box":{"source": "/snaek/img/general/checked-box.svg"},
+        "circle-green":{"source": "/snaek/img/general/circle-green.svg"},
+        "circle-grey":{"source": "/snaek/img/general/circle-grey.svg"},
+        "circle-red":{"source": "/snaek/img/general/circle-red.svg"},
+        "down":{"source": "/snaek/img/general/down.svg"},
+        "game-over":{"source": "/snaek/img/general/game-over.png"},
+        "main-background":{"source": "/snaek/img/general/main-background.jpg"},
+        "left":{"source": "/snaek/img/general/left.svg"},
+        "locked": {"source": "/snaek/img/general/locked.png"},
+        "next": {"source": "/snaek/img/general/next.png"},
+        "previous": {"source": "/snaek/img/general/previous.png"},
+        "right":{"source": "/snaek/img/general/right.svg"},
+        "snaek":{"source": "/snaek/img/general/snaek.png"},
+        "text-snaek":{"source": "/snaek/img/general/text-snaek.png"},
+        "text-the-snake":{"source": "/snaek/img/general/text-the-snake.png"},
+        "unchecked-box":{"source": "/snaek/img/general/unchecked-box.svg"},
+        "up":{"source": "/snaek/img/general/up.svg"},
+        "white":{"source": "/snaek/img/general/white.png"}
+    },
+    "buttons":{
+        "achievements":{
+            "source": "/snaek/img/buttons/achievements.png"
+        },
+        "back":{
+            "source": "/snaek/img/buttons/back.png"
+        },
+        "continue":{
+            "source": "/snaek/img/buttons/continue.png"
+        },
+        "credits":{
+            "source": "/snaek/img/buttons/credits.png"
+        },
+        "library":{
+            "source": "/snaek/img/buttons/library.png"
+        },
+        "story":{
+            "source": "/snaek/img/buttons/story.png"
+        },
+        "next":{
+            "source": "/snaek/img/buttons/next.png"
+        },
+        "no":{
+            "source": "/snaek/img/buttons/no.png"
+        },
+        "online":{
+            "source": "/snaek/img/buttons/online.png"
+        },
+        "pause":{
+            "source": "/snaek/img/buttons/pause.png"
+        },
+        "previous":{
+            "source": "/snaek/img/buttons/previous.png"
+        },
+        "restart":{
+            "source": "/snaek/img/buttons/restart.png"
+        },
+        "skip":{
+            "source": "/snaek/img/buttons/skip.png"
+        },
+        "survival":{
+            "source": "/snaek/img/buttons/survival.png"
+        },
+        "transparent":{
+            "source": "/snaek/img/buttons/transparent.png"
+        },
+        "yes":{
+            "source": "/snaek/img/buttons/yes.png"
+        }
+    },
+    "menus":{
+        "gameinitializing":{
+            "afterload":"",
+            "left":{
+                "clear": true,
+                "buttons": {},
+                "texts":[]
+            },
+            "main":{
+                "clear": [true, true, true, true, true, true, true],
+                "buttons": {},
+                "texts":[],
+                "images":[]
+            }
+        },
+        "mainmenu":{
+            "afterload":"drawDifficulty()",
+            "left":{
+                "clear": true,
+                "buttons": {
+                    "story": {
+                        "x": 0.2,
+                        "y": 0.2,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": "iniStory()"
+                    },
+                    "survival": {
+                        "x": 0.2,
+                        "y": 1.3,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": ""
+                    },
+                    "online": {
+                        "x": 0.2,
+                        "y": 2.4,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": ""
+                    },
+                    "achievements":{
+                        "x": 0.2,
+                        "y": 3.5,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": ""
+                    },
+                    "library":{
+                        "x": 0.2,
+                        "y": 4.6,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": "updateState(_GAME_LIBRARY)"
+                    },
+                    "credits":{
+                        "x": 0.2,
+                        "y": 5.7,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": ""
+                    }
+                },
+                "texts":[]
+            },
+            "main":{
+                "clear": [true, true, true, true, true, true, true],
+                "buttons": {},
+                "texts":[],
+                "images":[
+                    {
+                        "name": "snaek",
+                        "layer": 3,
+                        "opacity": 1,
+                        "x": 7,
+                        "y": 6,
+                        "w": 2.75,
+                        "h": 2.75
+                    },
+                    {
+                        "name": "text-snaek",
+                        "layer": 3,
+                        "opacity": 1,
+                        "x": 1,
+                        "y": 1,
+                        "w": 10,
+                        "h": 2.53
+                    },
+                    {
+                        "name": "text-the-snake",
+                        "layer": 3,
+                        "opacity": 1,
+                        "x": 2,
+                        "y": 4,
+                        "w": 8,
+                        "h": 1.2
+                    },
+                    {
+                        "name": "beta",
+                        "layer": 3,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "w": 2,
+                        "h": 2.3
+                    },
+                    {
+                        "name": "main-background",
+                        "layer": 2,
+                        "opacity": 0.8,
+                        "x": 0,
+                        "y": 0,
+                        "w": 12,
+                        "h": 9
+                    }
+                ]
+            }
+        },
+        "gamerunning":{
+            "afterload":"drawStatiscs()",
+            "left":{
+                "clear": true,
+                "buttons": {
+                    "pause": {
+                        "x": 0.2,
+                        "y": 5.7,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": "togglePause()"
+                    },
+                    "restart": {
+                        "x": 0.2,
+                        "y": 6.8,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": "togglePause();updateState(_GAME_RESTART);"
+                    },
+                    "back": {
+                        "x": 0.2,
+                        "y": 7.9,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": "togglePause();updateState(_GAME_BACK);"
+                    }
+                },
+                "texts":[]
+            },
+            "main":{
+                "clear": [false, false, false, false, false, true, true],
+                "buttons": {},
+                "texts":[],
+                "images":[]
+            }
+        },
+        "gamepaused":{
+            "afterload":"drawStatiscs()",
+            "left":{
+                "clear": true,
+                "buttons": {},
+                "texts":[]
+            },
+            "main":{
+                "clear": [false, false, false, false, false, true, true],
+                "buttons": {
+                    "continue": {
+                        "layer": 6,
+                        "x": 4.0,
+                        "y": 4.0,
+                        "w": 4.0,
+                        "h": 1.0,
+                        "action": "togglePause()"
+                    }
+                },
+                "texts":[],
+                "images":[
+                    {
+                        "name": "white",
+                        "layer": 5,
+                        "opacity": 0.6,
+                        "x": 0,
+                        "y": 0,
+                        "w": 12,
+                        "h": 9
+                    }
+                ]
+            }
+        },
+        "gameover":{
+            "afterload":"drawStatiscs()",
+            "left":{
+                "clear": true,
+                "buttons": {},
+                "texts":[]
+            },
+            "main":{
+                "clear": [false, false, false, false, false, true, true],
+                "buttons": {
+                    "restart": {
+                        "layer": 6,
+                        "x": 4.0,
+                        "y": 4.0,
+                        "w": 4.0,
+                        "h": 1.0,
+                        "action": "newGame()"
+                    },
+                    "back": {
+                        "layer": 6,
+                        "x": 4.0,
+                        "y": 5.5,
+                        "w": 4.0,
+                        "h": 1.0,
+                        "action": "if(_currentLevelJson){updateState(_GAME_STAGES);}else{updateState(_GAME_MAINMENU);}"
+                    }
+                },
+                "texts":[],
+                "images":[
+                    {
+                        "name": "white",
+                        "layer": 5,
+                        "opacity": 0.6,
+                        "x": 0,
+                        "y": 0,
+                        "w": 12,
+                        "h": 9
+                    },
+                    {
+                        "name": "game-over",
+                        "layer": 5,
+                        "opacity": 1,
+                        "x": 2,
+                        "y": 2,
+                        "w": 8,
+                        "h": 1.18
+                    }
+                ]
+            }
+        },
+        "story":{
+            "afterload":"drawStoryTiles()",
+            "left":{
+                "clear": true,
+                "buttons": {
+                    "back": {
+                        "x": 0.2,
+                        "y": 7.9,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": "updateState(_GAME_MAINMENU)"
+                    }
+                },
+                "texts":[]
+            },
+            "main":{
+                "clear": [true, true, true, true, true, true, true],
+                "buttons": {},
+                "texts":[],
+                "images":[]
+            }
+        },
+        "stages":{
+            "afterload":"drawStages()",
+            "left":{
+                "clear": true,
+                "buttons": {
+                    "back": {
+                        "x": 0.2,
+                        "y": 7.9,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": "updateState(_GAME_STORY)"
+                    }
+                },
+                "texts":[]
+            },
+            "main":{
+                "clear": [true, true, true, true, true, true, true],
+                "buttons": {},
+                "texts":[],
+                "images":[]
+            }
+        },
+        "dialog":{
+            "afterload":"drawSnaekDialogBox();",
+            "left":{
+                "clear": true,
+                "buttons": {},
+                "texts":[]
+            },
+            "main":{
+                "clear": [false, false, false, false, false, true, true],
+                "buttons": {
+                    "next": {
+                        "layer": 6,
+                        "x": 10.0,
+                        "y": 0.125,
+                        "w": 1.5,
+                        "h": 0.375,
+                        "action": "nextDialog()"
+                    },
+                    "transparent": {
+                        "layer": 6,
+                        "x": 0.5,
+                        "y": 0.5,
+                        "w": 11,
+                        "h": 5,
+                        "action": "nextDialog()"
+                    },
+                    "previous": {
+                        "layer": 6,
+                        "x": 8.5,
+                        "y": 0.125,
+                        "w": 1.5,
+                        "h": 0.375,
+                        "action": "previousDialog()"
+                    },
+                    "skip": {
+                        "layer": 6,
+                        "x": 0.5,
+                        "y": 0.125,
+                        "w": 1.5,
+                        "h": 0.375,
+                        "action": "skipDialog()"
+                    }
+                },
+                "texts":[],
+                "images":[
+                    {
+                        "name": "white",
+                        "layer": 5,
+                        "opacity": 0.6,
+                        "x": 0,
+                        "y": 0,
+                        "w": 12,
+                        "h": 9
+                    }
+                ]
+            }
+        },
+        "restart":{
+            "afterload":"drawStatiscs();",
+            "left":{
+                "clear": true,
+                "buttons": {},
+                "texts":[]
+            },
+            "main":{
+                "clear": [false, false, false, false, false, true, true],
+                "buttons": {
+                    "yes": {
+                        "layer": 6,
+                        "x": 3.0,
+                        "y": 5.0,
+                        "w": 2.5,
+                        "h": 0.625,
+                        "action": "newGame()"
+                    },
+                    "no": {
+                        "layer": 6,
+                        "x": 6.5,
+                        "y": 5.0,
+                        "w": 2.5,
+                        "h": 0.625,
+                        "action": "resumeGame()"
+                    }
+                },
+                "texts":[
+                    {
+                        "layer": 5,
+                        "text": "'Restart?'",
+                        "x": 6.2,
+                        "y": 4.5,
+                        "w": 5,
+                        "h": 1,
+                        "color": "#fff",
+                        "alignment":"center"                     
+                    }                    
+                ],
+                "images":[
+                    {
+                        "name": "white",
+                        "layer": 5,
+                        "opacity": 0.6,
+                        "x": 0,
+                        "y": 0,
+                        "w": 12,
+                        "h": 9
+                    }
+                ]
+            }
+        },
+        "back":{
+            "afterload":"drawStatiscs();",
+            "left":{
+                "clear": true,
+                "buttons": {},
+                "texts":[]
+            },
+            "main":{
+                "clear": [false, false, false, false, false, true, true],
+                "buttons": {
+                    "yes": {
+                        "layer": 6,
+                        "x": 3.0,
+                        "y": 5.0,
+                        "w": 2.5,
+                        "h": 0.625,
+                        "action": "if(_currentLevelJson){updateState(_GAME_STAGES);}else{updateState(_GAME_MAINMENU);}"
+                    },
+                    "no": {
+                        "layer": 6,
+                        "x": 6.5,
+                        "y": 5.0,
+                        "w": 2.5,
+                        "h": 0.625,
+                        "action": "resumeGame()"
+                    }
+                },
+                "texts":[
+                    {
+                        "layer": 5,
+                        "text": "'Exit Game?'",
+                        "x": 6.2,
+                        "y": 4.5,
+                        "w": 7,
+                        "h": 1,
+                        "color": "#fff",
+                        "alignment":"center"                     
+                    }                    
+                ],
+                "images":[
+                    {
+                        "name": "white",
+                        "layer": 5,
+                        "opacity": 0.6,
+                        "x": 0,
+                        "y": 0,
+                        "w": 12,
+                        "h": 9
+                    }
+                ]
+            }
+        },
+        "library":{
+            "afterload":"drawLibrary()",
+            "left":{
+                "clear": true,
+                "buttons": {
+                    "back": {
+                        "x": 0.2,
+                        "y": 7.9,
+                        "w": 3.6,
+                        "h": 0.9,
+                        "action": "updateState(_GAME_MAINMENU)"
+                    }
+                },
+                "texts":[]
+            },
+            "main":{
+                "clear": [true, true, true, true, true, true, true],
+                "buttons": {},
+                "texts":[],
+                "images":[]
+            }
+        }
+    }
+}
