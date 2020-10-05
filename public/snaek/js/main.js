@@ -1968,6 +1968,10 @@ function onLoadGame() {
    $("#left-canvas").mouseup(onLeftCanvasMouseUp);
    $(".main-canvas").last().mouseleave(onMainCanvasMouseLeave);
    $("#left-canvas").mouseleave(onLeftCanvasMouseLeave);
+
+   $(window).resize(function() {
+      updateContent($("#content").outerWidth(), $("#content").outerHeight());
+   });
 }
 
 function onMainCanvasKeyPress(key) {

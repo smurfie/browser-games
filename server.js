@@ -26,6 +26,10 @@ app.get('/game/snaek', function(req, res) {
   res.render('snaek');
 });
 
+app.get('/game/maze', function(req, res) {
+  res.render('maze');
+});
+
 app.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}`);
 })
