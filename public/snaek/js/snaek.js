@@ -1,5 +1,5 @@
-//Global vars
-//Game states has to coincide with the ones in the json
+// Global vars
+// Game states has to coincide with the ones in the json
 var _GAME_NOT_INITIALIZED = "gamenotinitialized";
 var _GAME_INITILIZING = "gameinitializing"
 var _GAME_MAINMENU = "mainmenu";
@@ -15,7 +15,7 @@ var _GAME_BACK = "back";
 
 var _FPS = 50;
 
-//directions
+// directions
 var _NOMOVE = 0;
 var _LEFT = 1;
 var _UP = 2;
@@ -29,18 +29,18 @@ var _PAUSE = 8;
 var _SPEEDUP = 9;
 var _SPEEDDOWN = 10;
 
-//Grid size
+// Grid size
 var _WSQUARE = 12;
 var _HSQUARE = 9;
-var _scale; //Multiplier of the size. Don't use multiples of 3 to avoid strange behaviour on square edges
-var _squareSize; //Size of a square (contemplating the scale)
-var _sq; //Size of a square of size 1/12 * 1/9 of the grid (ignoring scale);
+var _scale; // Multiplier of the size. Don't use multiples of 3 to avoid strange behaviour on square edges
+var _squareSize; // Size of a square (contemplating the scale)
+var _sq; // Size of a square of size 1/12 * 1/9 of the grid (ignoring scale);
 
 var _EMPTY = "empty";
 var _SNAEK = "snaek";
 var _SNAEK_COLOR = "#00ff00";
 
-//json
+// json
 var _itemsJson;
 var _enemiesJson;
 var _buttonsJson;
@@ -48,7 +48,7 @@ var _menusJson;
 var _imagesJson;
 var _storyJson;
 
-//loads
+// loads
 var _totalJson = 0;
 var _totalEntities = 0;
 var _totalButtons = 0;
@@ -68,15 +68,15 @@ var _currentStage;
 var _currentLevel;
 var _currentLevelJson;
 
-//Game window
+// Game window
 var _lw;
 var _mw;
 var _h;
 var _grid;
-var _gridVisited; //Tells for each cell if it's background has to be revealed or not
+var _gridVisited; // Tells for each cell if it's background has to be revealed or not
 
 
-//context
+// context
 var _lctx;
 var _mctx = [];
 /*
@@ -90,40 +90,40 @@ var _mctx = [];
  ** 6: buttons
  */
 
-//mappings
+// mappings
 var _keyMapping = {};
 
-//snaek (an array of posx, posy, from, to)
+// snaek (an array of posx, posy, from, to)
 var _snaek;
 var _snaekLength;
-var _snaekSpeed; //squares per second
-var _tmpSnaekSpeed; //When changed we modify this one and when the snaek is updated the real one.
+var _snaekSpeed; // squares per second
+var _tmpSnaekSpeed; // When changed we modify this one and when the snaek is updated the real one.
 var _snaekMaxSpeed;
 
-var _snaekDirection; //Array with the queued directions
+var _snaekDirection; // Array with the queued directions
 var _tilesRevealed;
 
-//objects (x, y, object, timesToRespawn, [life])
+// objects (x, y, object, timesToRespawn, [life])
 var _objects;
 
-//Update
+// Update
 var _update;
 
-//timings
+// timings
 var _timingSnaek;
 var _turnsStopped;
 var _turnsSliding;
 
-//Environment effects
-var _environment; //Transparency
-var _environmentInc; //Variation per 0.1 second
-var _environmentTopLimit; //Limit of transparency
-var _environmentColor; //Fog, night, poison, water, blood...
+// Environment effects
+var _environment; // Transparency
+var _environmentInc; // Variation per 0.1 second
+var _environmentTopLimit; // Limit of transparency
+var _environmentColor; // Fog, night, poison, water, blood...
 
-//buttons
-var _buttons = {}; //{name: [pos, source]}
-var _lshapes = []; //[{ctx, x, y, w, h, img, func, data}]
-var _mshapes = []; //[{ctx, x, y, w, h, img, func, data}]
+// buttons
+var _buttons = {}; // {name: [pos, source]}
+var _lshapes = []; // [{ctx, x, y, w, h, img, func, data}]
+var _mshapes = []; // [{ctx, x, y, w, h, img, func, data}]
 var _NOTHING = -1;
 var _lobjectHover = _NOTHING;
 var _mobjectHover = _NOTHING;
@@ -132,25 +132,26 @@ var _CLICKABLE_NORMAL = 0;
 var _CLICKABLE_HOVER = 1;
 var _CLICKABLE_PRESSED = 2;
 
-//dialog
+// dialog
 var _dialog;
 var _dialogArray;
 var _dialogIndex;
 var _PREGAME = 0;
 var _INGAME = 1;
 
-//objectives
+// objectives
 var _objectivesArray;
 var _objectivesIndex;
 
-//others
+// others
 var _alertBrowser = false;
 var _realfps = 0;
 var _frames = 0;
 var _timefps = 0;
 var _gameStatiscs = {};
 var _objectiveStatiscs = {};
-//Glogal Statiscs are saved directly to the computer
+
+// Glogal Statiscs are saved directly to the computer
 var _remainintTime = 0;
 var _setRemainingTime = false;
 var _DIF_EASY = 1;
@@ -162,10 +163,10 @@ var _LIBRARY_ENEMIES = 1;
 var _libraryTab = _LIBRARY_ITEMS;
 var _libraryPage = 0;
 
-//EveryGame subweb needs this function (updateContent) that is called once the web is created or it's resized
+// EveryGame subweb needs this function (updateContent) that is called once the web is created or it's resized
 function updateContent(w, h) {
    if ($('#content>canvas').length==0) {
-      //First time here we have to populate the content with the canvas
+      // First time here we have to populate the content with the canvas
       createCanvas();
    }
    resizingCanvas(w, h);
@@ -218,7 +219,7 @@ function updateState(name) {
 function drawNewState() {
    if (_state == _GAME_RUNNING || _state == _GAME_PAUSED || _state == _GAME_OVER){
       _squareSize = _mw/(_WSQUARE * _scale);
-      repaintGrid(); //Main Canvas
+      repaintGrid(); // Main Canvas
       drawGrid();
    }
    drawLeftCanvas();
@@ -227,16 +228,15 @@ function drawNewState() {
 }
 
 function resizingCanvas(totalW, totalH) {
-   //We want an aspect ratio of 4+12:9 with a minimum padding distance through absolute positioning of aprox. 1%
+   // We want an aspect ratio of 4+12:9 with a minimum padding distance through absolute positioning of aprox. 1%
    if (totalW * 9/16 > totalH) {
-      //We have to add more padding to the width
+      // We have to add more padding to the width
       innerH = Math.floor((totalH - (0.02 * totalH)) / 9) * 9;
       paddingH = Math.floor((totalH - innerH) / 2);
       innerW = 16 * innerH / 9;
       paddingW = Math.floor((totalW - innerW) / 2);
-   }
-   else{
-      //We have to add padding to the heigth
+   } else {
+      // We have to add padding to the heigth
       innerW = Math.floor((totalW - (0.02 * totalW)) / 16) * 16;
       paddingW = Math.floor((totalW - innerW) / 2);
       innerH = 9 * innerW / 16;
@@ -289,24 +289,24 @@ function initMainJson(json) {
    _totalEntities += Object.keys(_enemiesJson).length + Object.keys(_itemsJson).length;;
    _totalButtons += Object.keys(_buttonsJson).length;
    _totalImages +=  Object.keys(_imagesJson).length;
-   updateState(_GAME_INITILIZING); //Now the updateCanvas can read the _menusJson
+   updateState(_GAME_INITILIZING); // Now the updateCanvas can read the _menusJson
    initMainImageMapping();
 }
 
 function initMainImageMapping() {
-   //Items
+   // Items
    for (var key in _itemsJson) {
       _itemsJson[key].img = loadImage(_itemsJson[key].source, "entity");      
    }
-   //Enemies
+   // Enemies
    for (var key in _enemiesJson) {
       _enemiesJson[key].img = loadImage(_enemiesJson[key].source, "entity");
    }
-   //Buttons
+   // Buttons
    for (var key in _buttonsJson) {
       _buttonsJson[key].img = loadImage(_buttonsJson[key].source, "button");
    }
-   //Images
+   // Images
    for (var key in _imagesJson) {
       _imagesJson[key].img = loadImage(_imagesJson[key].source, "image");
    }    
@@ -325,15 +325,15 @@ function initStoryJson(json) {
 }
 
 function initStoryImageMapping(story) {
-   //Characters
+   // Characters
    for (var key in _storyJson[story].characters) {
       _storyJson[story].characters[key].img = loadImage(_storyJson[story].characters[key].source, "character");
    }
-   //Backgrounds
+   // Backgrounds
    for (var key in _storyJson[story].backgrounds) {
       _storyJson[story].backgrounds[key].img = loadImage(_storyJson[story].backgrounds[key].source, "background");
    }
-   //Image
+   // Image
    _storyJson[story].img = loadImage(_storyJson[story].source, "image");
 }
 
@@ -434,7 +434,7 @@ function newGame() {
    _environmentInc = 0;
    _environmentTopLimit = 0.9;
    _environmentColor = "#000";
-   //clear canvas
+   // clear canvas
    for (i=0; i<_mctx.length; i++) {      
       _mctx[i].clearRect(0,0,_mw,_h);
    }
@@ -461,7 +461,7 @@ function newGame() {
       _tmpSnaekSpeed = 4;
    }   
    _squareSize = _mw/(_WSQUARE * _scale);
-   initGrid(); //We need to set the _scale value before calling this
+   initGrid(); // We need to set the _scale value before calling this
    setGrid(Math.floor(_WSQUARE * _scale/4),Math.floor(_HSQUARE * _scale/2), _SNAEK)
    _snaek = [[Math.floor(_WSQUARE * _scale/4), Math.floor(_HSQUARE  * _scale/2), _LEFT , _RIGHT]];   
    _snaekDirection = [_RIGHT];   
@@ -480,13 +480,13 @@ function newGame() {
    resumeGame();
 }
 
-//Inicialized each time a game begins
+// Inicialized each time a game begins
 function iniGameStatiscs() {
    _gameStatiscs = {};
    iniObjectivesStatiscs();
 }
 
-//Inicialized each time an objective begins
+// Inicialized each time an objective begins
 function iniObjectivesStatiscs() {
    _objectiveStatiscs = {}
 }
@@ -680,7 +680,7 @@ function updateSnaek() {
    }
    reversed = false;
    
-   //Determining the 'next' movement
+   // Determining the 'next' movement
    if (_snaekDirection.length > 0 && _turnsSliding == 0) {
       snaekDirection = _snaekDirection.shift();
    }
@@ -719,12 +719,11 @@ function doSnakeMovement(next) {
       if (_enemiesJson[value].eatable) {
          deleteObject(x, y, true);
          _snaek.push(next);
-         setGrid(x, y, _SNAEK);          
+         setGrid(x, y, _SNAEK);
       }
       checkSnaekLength();
       eval(_enemiesJson[value].afterImpact);
-   }
-   else{ //is item      
+   } else { // is item
       eval(_itemsJson[value].beforeImpact);
       if (_state == _GAME_OVER) {
          return;
@@ -732,7 +731,7 @@ function doSnakeMovement(next) {
       if (_itemsJson[value].eatable) {
          deleteObject(x, y, true);
          _snaek.push(next);
-         setGrid(x, y, _SNAEK);          
+         setGrid(x, y, _SNAEK);
       }
       checkSnaekLength();
       eval(_itemsJson[value].afterImpact);
@@ -788,11 +787,11 @@ function checkSnaekLength() {
    while (_snaek.length > _snaekLength) {
       setGrid(_snaek[0][0], _snaek[0][1], _EMPTY);
       setGridVisited(_snaek[0][0], _snaek[0][1]);
-      _snaek.splice(0, 1);      
+      _snaek.splice(0, 1);
    }
 }
 
-//Modify next to be the next snaekMovement and returns true if it is possible or false if it isn't
+// Modify next to be the next snaekMovement and returns true if it is possible or false if it isn't
 function nextSnaekMovement(next, snaekDirection) {
    switch (snaekDirection) {
       case _RIGHT:
@@ -856,7 +855,7 @@ function direction(direction) {
    if (direction == _RIGHT) {
       return "right";
    }
-   return "circle-red"; //Error
+   return "circle-red"; // Error
 }
 
 function snaekTurnLeft() {
@@ -937,7 +936,7 @@ function setGrid(x, y, value) {
    drawUpperLayer(x, y);
 }
 
-//object is the name of the object (FOOD, MOUSE...)
+// object is the name of the object (FOOD, MOUSE...)
 function createObjects(n, object, respawnTimes){
    created = 0;
    tries = 0;
@@ -945,7 +944,7 @@ function createObjects(n, object, respawnTimes){
       i = Math.floor(Math.random() * _WSQUARE * _HSQUARE * _scale * _scale);
       x = i%(_WSQUARE * _scale);
       y = Math.floor(i/(_WSQUARE * _scale));
-      //Check that the distance to the head of the snaek is > 1
+      // Check that the distance to the head of the snaek is > 1
       if (squareExistsAndObject(x,y,_EMPTY) && (Math.abs(x-_snaek[_snaek.length-1][0])>2 || Math.abs(y-_snaek[_snaek.length-1][1]>2))) {
          createObject(object, x, y, respawnTimes);
          created++;
@@ -957,19 +956,17 @@ function createObjects(n, object, respawnTimes){
    }
 }
 
-//Create an object in the given position
+// Create an object in the given position
 function createObject(object, x, y, respawnTimes){
    if (squareExistsAndObject(x,y,_EMPTY)){
       setGrid(x, y, object);
       if (_enemiesJson[object] && _enemiesJson[object].life) {
          _objects.push([x, y, object, respawnTimes, _enemiesJson[object].life*_difficulty]);
-      }
-      else{
+      } else {
          _objects.push([x, y, object, respawnTimes]);
       }
       unlockObject(object);
-   }
-   else{ //if not empty create the object anywhere
+   } else { // if not empty create the object anywhere
       createObjects(1, object, respawnTimes);
    }
 }
@@ -1004,11 +1001,11 @@ function deleteObject(x, y, killed) {
          }
          if (killed) {
             incStatiscs("objects_" + name,1);
-         }         
+         }
          _objects.splice(i,1);
          if (respawnTimes > 0) {
             createObjects(1, name, respawnTimes-1);
-         }         
+         }
          return;
       }
    }
@@ -1033,7 +1030,7 @@ function deleteObjects(kind) {
    }
 }
 
-//return true if after decreasing the life is dead
+// return true if after decreasing the life is dead
 function decreaseLife(x, y, inc) {
    for (i=0; i<_objects.length; i++) {
       if (_objects[i][0] == x && _objects[i][1] == y) {
@@ -1048,7 +1045,7 @@ function decreaseLife(x, y, inc) {
    return false;
 }
 
-function updateEnemies(){
+function updateEnemies() {
    for (i=0; i<_objects.length; i++) {
       if (isEnemy(_objects[i][2]) && isEnemyTurn(_objects[i][2])) {
          moveEnemy(i);
@@ -1094,7 +1091,7 @@ function moveEnemy(i) {
    eval(_enemiesJson[value].postMove);
 }
 
-//modifies the array to do a random move and if it can't stay in the same pos and returns false
+// modifies the array to do a random move and if it can't stay in the same pos and returns false
 function randomMove(pos) {
    var direction = Math.floor(Math.random() * 4) + 1;
    var tmp=[pos[0],pos[1]];
@@ -1123,8 +1120,8 @@ function randomMove(pos) {
    return true;
 }
 
-//modifies the array to do a random move and if it can't stay in the same pos and returns false
-//If the snake is near he stings the snake
+// modifies the array to do a random move and if it can't stay in the same pos and returns false
+// If the snake is near he stings the snake
 function randomAttackMove(pos) {
    if (!attackMove(pos)) {
       return randomMove(pos);
@@ -1144,7 +1141,7 @@ function attackMove(pos) {
    return false;
 }
 
-//modifies the array to do teleport move and if it can't stay in the same pos and returns false
+// modifies the array to do teleport move and if it can't stay in the same pos and returns false
 function teleportMove(pos) {
    var teleported = false
    var tries = 0;
@@ -1152,7 +1149,7 @@ function teleportMove(pos) {
       var i = Math.floor(Math.random() * _WSQUARE * _HSQUARE * _scale * _scale);
       var x = i%(_WSQUARE * _scale);
       var y = Math.floor(i/(_WSQUARE * _scale));
-      //Check that the distance to the head of the snaek is > 1
+      // Check that the distance to the head of the snaek is > 1
       if (squareExistsAndObject(x,y,_EMPTY) && (Math.abs(x-_snaek[_snaek.length-1][0])>2 || Math.abs(y-_snaek[_snaek.length-1][1]>2))) {
          teleported = true;
          pos[0] = x;
@@ -1164,7 +1161,7 @@ function teleportMove(pos) {
    return teleported;
 }
 
-//Try moving the knight and returns True if it has been moved
+// Try moving the knight and returns True if it has been moved
 function knightMove(i, pos) {
    var move;
    var x = pos[0];
@@ -1276,8 +1273,8 @@ function drawMainCanvas() {
    }
 }
 
-function drawLeftCanvas() {   
-   //clear Canvas
+function drawLeftCanvas() {
+   // clear Canvas
    if (_menusJson[_state].left.clear) {
       $('#left-canvas').css("cursor", "default");
       _lctx.clearRect(0,0,_lw,_h);
@@ -1314,7 +1311,7 @@ function drawStatiscs() {
          }
          y+=0.3;
       }      
-      //If boss draws the boss life
+      // If boss draws the boss life
       if (_objectivesArray[_objectivesIndex].boss){
          var totalLife = _enemiesJson[_objectivesArray[_objectivesIndex].boss].life*_difficulty;
          for (var i=0; i<_objects.length; i++) {
@@ -1362,12 +1359,12 @@ function drawStatiscs() {
          drawText(_lctx, "Slidding...", 0.25*_sq, y*_sq, 3.5*_sq, 0.25*_sq, "#922", "Calibri", "left");
          y+= 0.3;         
       }
-      //We only draw the changing speed once explained: story=0, stage=1, level=0, objective=2
+      // We only draw the changing speed once explained: story=0, stage=1, level=0, objective=2
       if (_currentStory > 0 || _currentStage > 1 || (_currentStage == 1 && _currentLevel>0) || (_currentStage == 1 && _currentLevel==0 & _objectivesIndex>1)) {
          drawText(_lctx, "Speed: "+_snaekSpeed+"/"+_snaekMaxSpeed, 0.25*_sq, y*_sq, 3.5*_sq, 0.25*_sq, "#922", "Calibri", "left");
          y+= 0.3;
       }
-      //We only draw the queue once explained: story=0, stage=0, level=1, objective=1
+      // We only draw the queue once explained: story=0, stage=0, level=1, objective=1
       if (_currentStory > 0 || _currentStage > 0 || _currentLevel > 1 || (_currentLevel == 1 && _objectivesIndex > 0)) {
          drawText(_lctx, "Queued:", 0.25*_sq, y*_sq, 3.5*_sq, 0.25*_sq, "#922", "Calibri", "left");
          if (_snaekDirection.length > 0) {
@@ -1378,8 +1375,8 @@ function drawStatiscs() {
          y+= 0.3;
       }     
       
-      //y+= 0.3;
-      //drawText(_lctx, "FPS: " + _realfps, 0.25*_sq, y*_sq, 3.5*_sq, 0.25*_sq, "#333", "Calibri", "left");
+      // y+= 0.3;
+      // drawText(_lctx, "FPS: " + _realfps, 0.25*_sq, y*_sq, 3.5*_sq, 0.25*_sq, "#333", "Calibri", "left");
    }
 }
 
@@ -1407,8 +1404,8 @@ function checkAvoids() {
             if (eval(_objectivesArray[_objectivesIndex].avoids[i].what)) {
                gameOver();
             }
-         }  
-      }      
+         }
+      }
    }
 }
 
@@ -1448,7 +1445,7 @@ function iniStory() {
 
 function drawImagePressed(ctx, img, x, y, w, h, clear, opacity) {
    if (clear) {         
-      ctx.clearRect(x-1,y-1,w+2,h+2); //We clear 1 more pixel to make sure that decimals don't affect us
+      ctx.clearRect(x-1,y-1,w+2,h+2); // We clear 1 more pixel to make sure that decimals don't affect us
    }
    drawImage(ctx, img, x+0.1*w, y+0.1*h, w-0.2*w, h-0.2*h, false, opacity);
 }
@@ -1456,7 +1453,7 @@ function drawImagePressed(ctx, img, x, y, w, h, clear, opacity) {
 function drawImage(ctx, img, x, y, w, h, clear, opacity) {
    ctx.globalAlpha = opacity;
    if (clear) {         
-      ctx.clearRect(x-1,y-1,w+2,h+2); //We clear 1 more pixel to make sure that decimals don't affect us
+      ctx.clearRect(x-1,y-1,w+2,h+2); // We clear 1 more pixel to make sure that decimals don't affect us
    }
    ctx.drawImage(img, x, y, w, h);
    ctx.lineWidth = 0;
@@ -1541,7 +1538,7 @@ function changeDifficulty(level) {
    drawDifficulty();
 }
 
-function drawStoryTiles() { //Space for 6 tiles
+function drawStoryTiles() { // Space for 6 tiles
    for (var i=0; i<_storyJson.length; i++) {
       x = i % 3;
       y = Math.floor(i/3);      
@@ -1755,7 +1752,7 @@ function beginLevel(data) {
    _dialog = _PREGAME;
    _dialogArray = _currentLevelJson.prelevel;
    _dialogIndex = 0;
-   updateState(_GAME_DIALOG);   
+   updateState(_GAME_DIALOG);
 }
 
 function drawSnaekDialogBox() {
@@ -1795,7 +1792,7 @@ function skipDialog() {
       case _PREGAME:
          newGame();
          break;
-      case _INGAME: //Load the next objective and load the enemies
+      case _INGAME: // Load the next objective and load the enemies
          _objectivesIndex++;
          iniObjectivesStatiscs();
          if (_objectivesIndex >= _objectivesArray.length) {
@@ -1915,7 +1912,7 @@ function postBubble(img, txt) {
    drawText(_mctx[5], txt, _sq*6, _sq*1.25, _sq*10, _sq*0.5, "#444", "Calibri", "center")
 }
 
-//Given a letter return it's keycode
+// Given a letter return it's keycode
 function keyCodeLetter(letter) {
    return letter.charCodeAt(0);
 }
@@ -1959,7 +1956,7 @@ function loadString(key) {
 function onLoadGame() {
    updateContent($("#content").outerWidth(), $("#content").outerHeight());
    $(".main-canvas").last().keydown(onMainCanvasKeyPress);
-   $("#left-canvas").keydown(onMainCanvasKeyPress); //Calls the same function that main canvas on key press
+   $("#left-canvas").keydown(onMainCanvasKeyPress); // Calls the same function that main canvas on key press
    $(".main-canvas").last().mousemove(onMainCanvasMouseMove);
    $("#left-canvas").mousemove(onLeftCanvasMouseMove);
    $(".main-canvas").last().mousedown(onMainCanvasMouseDown);   
@@ -2086,7 +2083,7 @@ function onLeftCanvasMouseUp(e) {
 }
 
 function onMainCanvasMouseUp(e) {      
-   //For cell phones we make the snaek turn left or right depending of the side of the screen clicked
+   // For cell phones we make the snaek turn left or right depending of the side of the screen clicked
    /*if (_state == _GAME_RUNNING) {
       if (e.offsetX <= _mw/2) {
          snaekTurnLeft();
@@ -2117,7 +2114,7 @@ function onMainCanvasMouseLeave(e) {
 }
 
 function onCanvasMouseLeave(e, ctx, objectHover, shapes) {
-   if (objectHover != _NOTHING) {         
+   if (objectHover != _NOTHING) {
       redrawClickable(shapes, objectHover, _CLICKABLE_NORMAL);
    }
 }

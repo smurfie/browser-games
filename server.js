@@ -10,10 +10,6 @@ app.set('view engine', 'ejs');
 // set the public folder
 app.use(express.static('public'));
 
-// to support JSON-encoded bodies: FIXME
-// app.use(express.urlencoded({ extended: true, limit:'1Mb', parameterLimit:10000 }));
-// app.use(express.json());
-
 app.get('/', function(req, res) {
   res.render('home');
 });

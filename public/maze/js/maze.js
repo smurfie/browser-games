@@ -4,46 +4,121 @@ var bindings={}; // A dic mapping ASCII keys to string values describing the act
 var actions={}; // A dic mapping actions to a boolean value indicating whether that action is currently being performed.
 
 jQuery(function($){
-   updateContent($("#content").outerWidth(), $("#content").outerHeight());
+   $('#width').change(function() {
+      var value = parseInt($(this).val());
+      if (value < 3 ) {
+         $('#width').val(3);
+      }
+      if (value > 100 ) {
+         $('#width').val(100);
+      }
+      updateHighscoreText();
+   });
+   $('#width').val(20);
+
+   $('#height').change(function() {
+      var value = parseInt($(this).val());
+      if (value < 3 ) {
+         $('#height').val(3);
+      }
+      if (value > 75 ) {
+         $('#height').val(75);
+      }
+      updateHighscoreText();
+   });
+   $('#height').val(15);
+
+   $('#scattering').change(function() {
+      var value = parseInt($(this).val());
+      if (value < 0 ) {
+         $('#scattering').val(0);
+      }
+      if (width > 100 ) {
+         $('#scattering').val(100);
+      }
+      updateHighscoreText();
+   });
+   $('#scattering').val(50);
+
+   $('#random').change(function() {
+      $('#scattering').prop('disabled', $(this).is(':checked'));
+   });
+   $('#random').click();
+
+   $('#new-game').click(function() {
+      stage.destroy();
+      clearInterval(mazeGame.interval);
+      updateContent();
+   });
+
+   $('#content').mousedown(function() {
+      mazeGame.mousePressed=true;
+   }); 
+   $('#content').mouseup(function() {
+      mazeGame.mousePressed=false;
+   });
+  
+   window.addEventListener('keydown',onKeyDown);
+   window.addEventListener('keyup',onKeyUp);
+   bindAction(87, 'move-up');
+   bindAction(38, 'move-up');
+   bindAction(65, 'move-left');
+   bindAction(37, 'move-left');
+   bindAction(83, 'move-down');
+   bindAction(40, 'move-down');
+   bindAction(68, 'move-right');
+   bindAction(39, 'move-right');
+
+   updateContent();
 });
 
-function updateContent(w, h) {
+function updateContent() {
+   var contentWidth = window.innerWidth;
+   var contentHeight = window.innerHeight - $('#options').outerHeight(true) - 10;
+   var squareDefaultSize = 30;
+   var squaresWidth = parseInt($('#width').val());
+   var squaresHeight = parseInt($('#height').val());
+   var scattering = parseInt($('#scattering').val());
+   var randomScattering = $('#random').is(':checked');
+   var fits = contentWidth >= squareDefaultSize * (squaresWidth + 2) &&
+         contentHeight >= squareDefaultSize * (squaresHeight + 2);
+   var squareSize = fits ? squareDefaultSize :
+         Math.min(Math.floor(contentWidth/(squaresWidth + 2)), Math.floor(contentHeight/(squaresHeight + 2)));
+   var mazeWidth = squareSize * (squaresWidth + 2);
+   var mazeHeight = squareSize * (squaresHeight + 2);
+   
    if ($('#content>div').length==0) { //First time here
-      var div = $("<div id='game'></div>");
-      $('#content').append(div);
       stage = new Kinetic.Stage({
-         container: 'game',
-         width: w,
-         height: h
+         container: 'content',
+         width: mazeWidth,
+         height: mazeHeight
       });
-      stage.background = backgroundLayer("#ccc");
+      stage.background = backgroundLayer('#ccc');
       stage.add(stage.background);
-      createMaze(20,15,30);
-   } else { //Redraw everything
-      stage.setWidth(w);
-      stage.setHeight(h);
-      stage.background.rect.setWidth(w);
-      stage.background.rect.setHeight(h);
-      stage.draw();
-   }  
+      createMaze(squaresWidth, squaresHeight, squareSize, scattering, randomScattering);
+   }
 }
 
-function createMaze(tilesWidth, tilesHeight, pixelsSquare) { 
-   initializeMaze(tilesWidth, tilesHeight, pixelsSquare);   
+function createMaze(tilesWidth, tilesHeight, pixelsSquare, scattering, randomScattering) { 
+   initializeMaze(tilesWidth, tilesHeight, scattering, randomScattering);   
    mazeIterativeCreate();
    makeTree();
-   drawMaze();
+   drawMaze(pixelsSquare);
    startGame();
 }
 
-function initializeMaze(tilesWidth, tilesHeight, pixelsSquare) {
+function initializeMaze(tilesWidth, tilesHeight, scattering, randomScattering) {
    mazeGame.width = tilesWidth;
    mazeGame.height = tilesHeight;
-   mazeGame.pixels = pixelsSquare;
    mazeGame.squares=[];
    mazeGame.vWalls=[];
    mazeGame.hWalls=[]
-   mazeGame.randomize=random(15,60); //To make the generation more random
+   if (randomScattering) {
+      mazeGame.randomize=random(15,60); //To make the generation more random
+      $('#scattering').val(mazeGame.randomize);
+   } else {
+      mazeGame.randomize=scattering;
+   }
    for (var i=0;i<mazeGame.height;i++) {
       mazeGame.squares[i]=[];      
       if (i<mazeGame.height-1) {
@@ -174,14 +249,19 @@ function mazeAddNode(node, x, y, wallx, wally, horizontal, antNode) {
    }
 }
 
-function drawMaze() {
+function drawMaze(pixelsSquare) {
+   mazeGame.pixels = pixelsSquare;
    var sq = mazeGame.pixels;
-   var strokeWidth = Math.floor(sq/15);
+   var strokeWidth = Math.max(Math.floor(sq/15),0.5);
    //Outer line
    var line = new Kinetic.Line({
-      points: [12,0,12,mazeGame.height*sq+38,mazeGame.width*sq+38,mazeGame.height*sq+38,mazeGame.width*sq+38,12,12,12],
+      points: [sq/2,sq/2,
+         sq/2,mazeGame.height*sq+3*sq/2,
+         mazeGame.width*sq+3*sq/2,mazeGame.height*sq+3*sq/2,
+         mazeGame.width*sq+3*sq/2,sq/2,
+         sq/2,sq/2],
       stroke: 'black',
-      strokeWidth:26
+      strokeWidth:sq
    });
    
    //Maze
@@ -190,7 +270,7 @@ function drawMaze() {
       for (var j=0;j<mazeGame.width;j++) {
          if (i<mazeGame.height-1 && mazeGame.hWalls[i][j]) {
             var line = new Kinetic.Line({
-               points: [25+sq*(j)-strokeWidth/2,25+sq*(i+1),25+sq*(j+1)+strokeWidth/2,25+sq*(i+1)],
+               points: [sq*(j+1)-strokeWidth/2,sq*(i+2),sq*(j+2)+strokeWidth/2,sq*(i+2)],
                stroke: 'black',
                strokeWidth:strokeWidth
             });
@@ -198,7 +278,7 @@ function drawMaze() {
          }
          if (j<mazeGame.width-1 && mazeGame.vWalls[i][j]) {
             var line = new Kinetic.Line({
-               points: [25+sq*(j+1),25+sq*(i)-strokeWidth/2,25+sq*(j+1),25+sq*(i+1)+strokeWidth/2],
+               points: [sq*(j+2),sq*(i+1)-strokeWidth/2,sq*(j+2),sq*(i+2)+strokeWidth/2],
                stroke: 'black',
                strokeWidth:strokeWidth
             });
@@ -210,8 +290,8 @@ function drawMaze() {
    
    //Start
    mazeGame.circle=new Kinetic.Circle({
-      x:25+sq/2+sq*mazeGame.root.cellPathStart[1],
-      y:25+sq/2+sq*mazeGame.root.cellPathStart[0],
+      x:3*sq/2+sq*mazeGame.root.cellPathStart[1],
+      y:3*sq/2+sq*mazeGame.root.cellPathStart[0],
       radius: sq/3,
       fill: 'red',
       stroke: 'black',
@@ -220,8 +300,8 @@ function drawMaze() {
    
    //End
    var circle=new Kinetic.Circle({
-      x:25+sq/2+sq*mazeGame.root.cellPathEnd[1],
-      y:25+sq/2+sq*mazeGame.root.cellPathEnd[0],
+      x:3*sq/2+sq*mazeGame.root.cellPathEnd[1],
+      y:3*sq/2+sq*mazeGame.root.cellPathEnd[0],
       radius: sq/3,
       fill: '#333',
       stroke: '#333',
@@ -231,28 +311,6 @@ function drawMaze() {
    layerBall.add(circle);
    layerBall.add(mazeGame.circle);
    stage.add(layerBall);
-   
-   //Tot això potser hauria d'anar a un altre lloc
-   $('#game').mouseenter(function(){
-      document.body.style.cursor = "pointer";      
-   }); 
-   $('#game').mouseleave(function(){
-      document.body.style.cursor = "default";
-      mazeGame.focus=false;
-   });
-   $('#game').mousedown(mouseIni); 
-   $('#game').mouseup(mouseEnd);
-  
-   window.addEventListener('keydown',onKeyDown);
-   window.addEventListener('keyup',onKeyUp);
-   bindAction(87, 'move-up');
-   bindAction(38, 'move-up');
-   bindAction(65, 'move-left');
-   bindAction(37, 'move-left');
-   bindAction(83, 'move-down');
-   bindAction(40, 'move-down');
-   bindAction(68, 'move-right');
-   bindAction(39, 'move-right');
 }
 
 function bindAction(key, action) {
@@ -272,18 +330,12 @@ function startGame() {
    mazeGame.inMovement = false;
    mazeGame.time = new Date().getTime();
    mazeGame.interval=setInterval(mazeBallMove,33);
-}
-
-function mouseIni() {
-   mazeGame.mousePressed=true;
-   mazeGame.focus=true;
-}
-
-function mouseEnd() {
-   mazeGame.mousePressed=false;
+   updateHighscoreText();
 }
 
 function mazeBallMove() {
+   $('#time').text((new Date().getTime()-mazeGame.time)/1000);
+
    if (mazeGame.inMovement) {
       return;
    }
@@ -301,14 +353,14 @@ function mazeBallMove() {
                return;
             }
          }
-      } else{
+      } else {
          if (!verticalMove(mousePosition)) {
             if(!horizontalMove(mousePosition)){
                return;
             }
          }
       }
-   } else if (mazeGame.focus) {
+   } else {
       if (actions['move-up']) {
          moveUp();
       } else if (actions['move-down']) {
@@ -337,16 +389,16 @@ function verticalMove(pos) {
       return false;
    }
    if (pos.y>mazeGame.circle.getY()) {
-      return moveDown();      
+      return moveDown();
    } else {
-      return moveUp();      
+      return moveUp();
    }
 }
 
 function moveLeft() {
    var sq=mazeGame.pixels;
-   var posX=(mazeGame.circle.getX()-25-sq/2)/sq;
-   var posY=(mazeGame.circle.getY()-25-sq/2)/sq;
+   var posX=(mazeGame.circle.getX()-3*sq/2)/sq;
+   var posY=(mazeGame.circle.getY()-3*sq/2)/sq;
    var endX;
    if (posX<1 || mazeGame.vWalls[posY][posX-1]) {         
       return false;
@@ -359,13 +411,13 @@ function moveLeft() {
 
 function moveRight() {
    var sq=mazeGame.pixels;
-   var posX=(mazeGame.circle.getX()-25-sq/2)/sq;
-   var posY=(mazeGame.circle.getY()-25-sq/2)/sq;
+   var posX=(mazeGame.circle.getX()-3*sq/2)/sq;
+   var posY=(mazeGame.circle.getY()-3*sq/2)/sq;
    var endX;
    if (posX>mazeGame.width-2 || mazeGame.vWalls[posY][posX]) {
       return false;
    } else {
-      endX = posX+1;                
+      endX = posX+1;
    }
    moveTo(posX, posY, endX, posY);
    return true;
@@ -373,13 +425,13 @@ function moveRight() {
 
 function moveUp() {
    var sq=mazeGame.pixels;
-   var posX=(mazeGame.circle.getX()-25-sq/2)/sq;
-   var posY=(mazeGame.circle.getY()-25-sq/2)/sq;
+   var posX=(mazeGame.circle.getX()-3*sq/2)/sq;
+   var posY=(mazeGame.circle.getY()-3*sq/2)/sq;
    var endY;
    if (posY<1 || mazeGame.hWalls[posY-1][posX]) {
       return false;
    } else {
-      endY = posY-1;                
+      endY = posY-1;
    }
    moveTo(posX, posY, posX, endY);
    return true;
@@ -387,13 +439,13 @@ function moveUp() {
 
 function moveDown() {
    var sq=mazeGame.pixels;
-   var posX=(mazeGame.circle.getX()-25-sq/2)/sq;
-   var posY=(mazeGame.circle.getY()-25-sq/2)/sq;
+   var posX=(mazeGame.circle.getX()-3*sq/2)/sq;
+   var posY=(mazeGame.circle.getY()-3*sq/2)/sq;
    var endY;
    if (posY>mazeGame.height-2 || mazeGame.hWalls[posY][posX]) {
       return false;
    } else {
-      endY = posY+1;                
+      endY = posY+1;
    }
    moveTo(posX, posY, posX, endY);
    return true;
@@ -403,11 +455,11 @@ function moveTo(posX, posY, endX, endY) {
    var sq=mazeGame.pixels;
    var anim=new Kinetic.Animation(function(frame) {
    if (frame.time < 200) {
-      mazeGame.circle.setX(25+sq/2+posX*sq+(endX-posX)*frame.time*sq/200);
-      mazeGame.circle.setY(25+sq/2+posY*sq+(endY-posY)*frame.time*sq/200);
-   }else{        
-      mazeGame.circle.setX(25+sq/2+endX*sq);
-      mazeGame.circle.setY(25+sq/2+endY*sq);
+      mazeGame.circle.setX(3*sq/2+posX*sq+(endX-posX)*frame.time*sq/200);
+      mazeGame.circle.setY(3*sq/2+posY*sq+(endY-posY)*frame.time*sq/200);
+   } else {
+      mazeGame.circle.setX(3*sq/2+endX*sq);
+      mazeGame.circle.setY(3*sq/2+endY*sq);
       anim.stop();
       clearInterval(mazeGame.interval);
       mazeGame.inMovement=false;
@@ -427,16 +479,22 @@ function moveTo(posX, posY, endX, endY) {
 
 function mazeGameCompleted() {
    mazeGame.time = new Date().getTime()-mazeGame.time;
-   //var star = mazeMedal();        
-   //var previousMedal=loadString("mazeMedal");
-   //var improved = false;        
+   $('#time').text(mazeGame.time/1000);
    
-   //if (!loadString("mazeTime") || mazeGame.time < loadString("mazeTime")) {
-   //   improved = true;
-      //storeString("mazeMedal", star);
-      //storeString("mazeTime", mazeGame.time);
-   //}
-   //mazeEndScreen();
+   var highscore = getHighscoreString(mazeGame.width, mazeGame.height, mazeGame.randomize)
+   if (!loadString(highscore) || mazeGame.time < loadString(highscore)) {
+      storeString(highscore, mazeGame.time);
+      updateHighscoreText();
+   }
+}
+
+function getHighscoreString(width, height, scattering) {
+   return 'mazeTime_' + width + '_' +height + '_' + scattering;
+}
+
+function updateHighscoreText() {
+   var value = loadString(getHighscoreString($('#width').val(), $('#height').val(), $('#scattering').val()))
+   $('#best-time').text(value ? parseInt(value) / 1000 : '--.--')
 }
 
 function backgroundLayer(color) {
@@ -453,4 +511,25 @@ function backgroundLayer(color) {
 //Generates a random integer number between ini and end;
 function random(ini, end) {
    return Math.floor(Math.random()*(end-ini+1))+ini;
+}
+
+function storeString(key, value) {
+   if(typeof(Storage)!=='undefined'){
+      localStorage[key]=value;
+   }
+   else if (!_alertBrowser){
+      alert('Sorry, your browser does not support web storage. Update to last version of Google Chrome');
+      _alertBrowser = true;
+   }
+}
+
+function loadString(key) {
+   if(typeof(Storage)!=='undefined'){
+      return localStorage[key];
+   }
+   else if (!_alertBrowser){
+      alert('Sorry, your browser does not support web storage. Update to last version of Google Chrome');
+      _alertBrowser = true;
+   }
+   return false;
 }
