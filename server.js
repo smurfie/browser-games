@@ -1,5 +1,5 @@
 const PORT = process.env.PORT || 3000;
-const ENV = process.env.NODE_ENV || 'localhost'; // 'production' in production
+const GAMES = ['snaek', 'maze'];
 
 let express = require('express'),
   app = express();
@@ -16,6 +16,15 @@ app.get('/', function(req, res) {
 
 app.get('/home', function(req, res) {
   res.render('home');
+});
+
+app.get('/game/:game?', function(req, res) {
+  var game = req.params.game;
+  if (GAMES.indexOf(game)>=0) {
+    res.render(game);
+  } else {
+    res.send('Game: ' + game + " doesn't exists");
+  }
 });
 
 app.get('/game/snaek', function(req, res) {

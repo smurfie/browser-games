@@ -1,0 +1,47 @@
+* {
+	font-family: cursive;
+}
+
+body {
+	background-color: burlywood;
+}
+
+a {
+	color: brown;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:active {
+	color: red;
+}
+
+.title {
+    padding-left: 40px;
+}
+
+.game-list {
+    list-style: none;
+}
+
+.game-list li {
+    display: inline-block;
+    padding: 5px;
+    background-color: bisque;
+    border: 2px brown solid;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.game-list li:hover {
+    background-color: orange;
+}
+
+.game-list img {
+    height: 200px;
+    width: 300px;
+    object-fit: contain;
+}
