@@ -1,0 +1,13 @@
+{
+"companyName": "SmurfieGames",
+"productName": "SpeedMaze",
+"dataUrl": "Web Player animations.data.unityweb",
+"asmCodeUrl": "Web Player animations.asm.code.unityweb",
+"asmMemoryUrl": "Web Player animations.asm.memory.unityweb",
+"asmFrameworkUrl": "Web Player animations.asm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}

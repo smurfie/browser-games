@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ('partials/analytics') %>
+    <title>Maze 3D GoT</title>
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg" />
+
+    <link rel="stylesheet" href="/maze3dGoT/TemplateData/style.css" />
+    <script src="/maze3dGoT/TemplateData/UnityProgress.js"></script>
+    <script src="/maze3dGoT/Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate(
+        "gameContainer",
+        "/maze3dGoT/Build/Web Player animations.json",
+        { onProgress: UnityProgress }
+      );
+    </script>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="gameContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+        <div class="title">SpeedMaze</div>
+      </div>
+    </div>
+  </body>
+</html>
