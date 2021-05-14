@@ -2,7 +2,12 @@
 
 ## Description
 
-Browser games is a repo of two games made a long time ago (around 2013) with KinetikJS. I adapted the games to the new technologies (Express and node) and made a few (very few) adjustments. The idea is that at some point in the future this repo will grow (or not). By now the games are only two:
+Browser games is a repo of games in various tecnologies:
+
+- `Snaek: The snake` and `Maze` were made a long time ago (around 2013) with KinetikJS.
+- `Maze 3D` and `Maze 3D GoT` were made around 2015 with Unity 5 and I updated them to Unity 2018.1 to be able to export to webGL. I couldn't update them to a newer version of Unity because UnityScript was deprecated in favor of c# but the migrating script didn't work for me. The two of them are basically the same game but with a flag changed.
+
+I adapted them to the new technologies (Express and node) and made a few (very few) adjustments. The idea is that at some point in the future this repo will grow (or not). By now the games are only four games:
 
 ### Snaek: The snake
 
@@ -14,7 +19,11 @@ This is a basic labyrinth/maze game where you have to get to the exit the fastes
 
 ### Maze 3D
 
+The same idea that the `Maze` but in a 3D environment. You can move the ball with the arrow keys.
+
 ### Maze 3D GoT
+
+A variant of the `Maze 3D` with a intro likewise the one in Game of Thrones
 
 ## Try it!
 
