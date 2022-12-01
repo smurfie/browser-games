@@ -27,7 +27,7 @@ A variant of the `Maze 3D` with a intro likewise the one in Game of Thrones
 
 ## Try it!
 
-You can see a live example at this [Live Server](https://html-games.herokuapp.com/) or you can run it locally.To run locally download the project in a Zip file or clone the repo and run:
+You can see a live example at this [Live Server](https://browser-games.onrender.com/) or you can run it locally.To run locally download the project in a Zip file or clone the repo and run:
 
 ```
 npm install
